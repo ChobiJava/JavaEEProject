@@ -18,6 +18,38 @@
             </ui:insert>
         </div>
 
+        <h:form>
+            <p:panelGrid columns="2" columnClasses="grid">
+            <p:outputLabel for="firstName" value="First Name: "/>
+            <p:inputText id="firstName" value="#{newStudent.firstName}" />
+
+            <p:outputLabel for="lastName" value="Last Name: " />
+            <p:inputText id="lastName" value="#{newStudent.lastName}" />
+
+            <p:outputLabel for="ssn" value="Social Security Number:" />
+            <p:inputText id="ssn" value="#{newStudent.ssn}" />
+            </p:panelGrid>
+            <p:commandButton id="register" action="#{studentController.register}" ajax="false" />
+        </h:form>
+
+        <h:panelGroup rendered="#{empty students}">
+            <em>No Students</em>
+        </h:panelGroup>
+        <p:dataTable var="_student" value="#{students}" rendered="#{not empty students}">
+            <p:column>
+                <f:facet name="header">SSN</f:facet>
+                #{_student.ssn}
+            </p:column>
+            <p:column>
+                <f:facet name="header">First Name</f:facet>
+                #{_student.firstName}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Last Name</f:facet>
+                #{_student.lastName}
+            </p:column>
+        </p:dataTable>
+
     </f:view>
 </h:body>
 
