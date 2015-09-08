@@ -1,0 +1,22 @@
+html, body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.header-main {
+    background: linear-gradient(to bottom, #1578c9, #0b66b1);
+    text-align: center;
+    padding: 5px;
+    margin: 0px;
+}
+
+#option-gear {
+    height: 35px;
+    width: 35px;
+    padding-right: 5px;
+}
+
+#option-user {
+    height: 35px;
+    width: 35px;
+}

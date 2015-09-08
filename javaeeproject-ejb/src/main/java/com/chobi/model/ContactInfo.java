@@ -1,12 +1,11 @@
 package com.chobi.model;
 
-import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
 /**
  * Created by Chobii on 07/09/15.
  */
-@Entity
+
 public class ContactInfo {
 
 
