@@ -5,50 +5,40 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
     <h:outputStylesheet library="css" name="stylesheet.css" />
 </h:head>
 
 <h:body>
     <f:view>
-        <div id="header">
-            <ui:insert name="header">
-                <ui:include src="/resources/templates/header.xhtml" />
-            </ui:insert>
-        </div>
+        <h:panelGroup layout="block">
+            <h:panelGroup layout="block" id="login-div">
+                <h:panelGroup styleClass="header" layout="block">
+                    <h:outputText id="header-text" value="SIGN IN"></h:outputText>
+                </h:panelGroup>
+                <h:panelGroup layout="block" id="login">
+                    <h:form id="login-form">
+                        <ul>
+                            <li>
+                                <h:inputText value="#{loginController.user}" styleClass="login-input" a:placeholder="Username"/>
+                            </li>
+                            <li>
+                                <h:inputSecret value="#{loginController.password}" styleClass="login-input" a:placeholder="Password"/>
+                            </li>
+                            <li>
+                                <h:commandButton styleClass="btn" id="login-btn" value="LOGIN" action="#{loginController.login}"/>
+                            </li>
+                        </ul>
+                        <br/>
+                    </h:form>
 
-        <h:form>
-            <p:panelGrid columns="2" columnClasses="grid">
-            <p:outputLabel for="firstName" value="First Name: "/>
-            <p:inputText id="firstName" value="#{newStudent.firstName}" />
-
-            <p:outputLabel for="lastName" value="Last Name: " />
-            <p:inputText id="lastName" value="#{newStudent.lastName}" />
-
-            <p:outputLabel for="ssn" value="Social Security Number:" />
-            <p:inputText id="ssn" value="#{newStudent.ssn}" />
-            </p:panelGrid>
-            <p:commandButton id="register" action="#{studentController.register}" ajax="false" />
-        </h:form>
-
-        <h:panelGroup rendered="#{empty students}">
-            <em>No Students</em>
+                </h:panelGroup>
+            </h:panelGroup>
         </h:panelGroup>
-        <p:dataTable var="_student" value="#{students}" rendered="#{not empty students}">
-            <p:column>
-                <f:facet name="header">SSN</f:facet>
-                #{_student.ssn}
-            </p:column>
-            <p:column>
-                <f:facet name="header">First Name</f:facet>
-                #{_student.firstName}
-            </p:column>
-            <p:column>
-                <f:facet name="header">Last Name</f:facet>
-                #{_student.lastName}
-            </p:column>
-        </p:dataTable>
+
+
 
     </f:view>
 </h:body>

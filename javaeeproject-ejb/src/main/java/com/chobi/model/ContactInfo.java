@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
  * Created by Chobii on 07/09/15.
  */
 
+
 public class ContactInfo {
 
 

@@ -1,35 +1,21 @@
 package com.chobi.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 /**
  * Created by Chobii on 07/09/15.
  */
 
-@Entity
-@Table(name = "Student")
+@Entity(name = "student")
 public class Student {
 
     @Id
-    @GeneratedValue
-    private int id;
-
     private String ssn;
 
     private String firstName;
 
     private String lastName;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getSsn() {
         return ssn;

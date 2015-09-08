@@ -1,6 +1,9 @@
-html, body {
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+
+html body {
     margin: 0px;
     padding: 0px;
+    background: #294072;
 }
 
 .header-main {
@@ -45,4 +48,116 @@ html, body {
 
 .ui-menu .menu-menuitem {
     margin: -5px;
+}
+
+
+.ui-panelgrid {
+    width: 25%;
+    margin: 0 auto;
+    padding-top: 20%;
+}
+
+.ui-panelgrid-content.ui-widget-content {
+    background-color: #0b66b1;
+}
+
+#login-div {
+    width: 390px;
+    margin: 0 auto;
+    background-color: #1C2B4A;
+    margin-top: 10%;
+    border-radius: 10px;
+}
+
+#login {
+    padding: 0 20px;
+}
+
+#login-form {
+    display: block;
+}
+
+.login-input {
+    background: #12192C;
+    width: 100%;
+    border: none;
+    outline: none;
+    color: rgba(205, 212, 222, 0.89);
+    vertical-align: top;
+    height: 40px;
+    font-size: 14px;
+}
+
+form {
+    display: block;
+}
+
+.asd {
+    width: 90%;
+    border: none;
+    outline: none;
+    color: rgba(61, 66, 73, 0.19);
+    vertical-align: top;
+    height: 40px;
+
+
+}
+
+ul li {
+    list-style: none;
+    height: 40px;
+    margin: 15px 0;
+}
+
+ul {
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    height: 80px;
+    background-color: #1c2443;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+#header-text {
+    padding-top: 13px;
+    display:block;
+    width: 127px;
+    height: 100%;
+    margin: 0 auto;
+    font-size: 40px;
+    color: white;
+    font-family: 'Source Sans Pro', sans-serif;
+
+}
+
+input {
+    text-indent: 5px;
+}
+
+.btn {
+    width: 100%;
+    height: 40px;
+    border: none;
+    margin-top: 8px;
+    background: #12bb49;
+    font-size: 25px;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: white;
 }
