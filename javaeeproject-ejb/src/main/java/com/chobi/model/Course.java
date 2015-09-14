@@ -1,5 +1,9 @@
 package com.chobi.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 
@@ -7,14 +11,20 @@ import java.time.LocalDate;
  * Created by Chobii on 07/09/15.
  */
 
-
+@Entity(name = "course")
 public class Course {
 
 
+    @Id
     private int id;
+    @NotNull
     private String courseName;
+    @NotNull
+    @Digits(fraction = 0, integer = 3)
     private int points;
+    @NotNull
     private LocalDate start;
+    @NotNull
     private LocalDate end;
 
     public int getId() {

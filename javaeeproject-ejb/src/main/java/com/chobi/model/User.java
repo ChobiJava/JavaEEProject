@@ -1,16 +1,26 @@
 package com.chobi.model;
 
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by Chobii on 08/09/15.
  */
-
+@Entity(name = "user")
 public class User {
 
+    @Id
+    private int id;
+    @NotNull
     private String userName;
+    @NotNull
+    @Size(min = 8, max = 16)
     private String passWord;
+    @NotNull
     private UserType userType;
 
     public String getUserName() {

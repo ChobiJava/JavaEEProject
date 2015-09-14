@@ -2,6 +2,7 @@ package com.chobi.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by Chobii on 07/09/15.
@@ -12,9 +13,9 @@ public class Student {
 
     @Id
     private String ssn;
-
+    @NotNull
     private String firstName;
-
+    @NotNull
     private String lastName;
 
     public String getSsn() {
