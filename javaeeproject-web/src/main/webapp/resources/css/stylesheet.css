@@ -1,13 +1,23 @@
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
 
+@font-face {
+    font-family: "doves";
+    src: url("doves.ttf.xhtml?ln=fonts");
+}
+
+@font-face {
+    font-family: acki;
+    src: url("AckiPreschool.ttf.xhtml?ln=fonts");
+}
+
 * {
     margin: 0;
     padding: 0;
 }
 
 html body {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     background: #294072;
 }
 
@@ -236,5 +246,9 @@ input {
 .ui-menubar .ui-menuitem .ui-menuitem-link:hover {
     box-shadow: none;
     -webkit-box-shadow: none;
+}
+
+.ui-menu .ui-menuitem-text {
+    font-family: acki;
 }
 
