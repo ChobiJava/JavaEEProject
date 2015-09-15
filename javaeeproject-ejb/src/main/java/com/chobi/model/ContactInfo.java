@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 public class ContactInfo {
 
     @Id
-    private String ssn;
+    private int id;
     @NotNull
     @Digits(fraction = 0, integer = 12)
     private String phonenumber;
