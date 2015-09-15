@@ -1,29 +1,44 @@
 package com.chobi.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * Created by Chobii on 07/09/15.
  */
 
-@Entity(name = "teacher")
+@Entity
+@Table(name = "teacher")
 public class Teacher {
 
     @Id
-    private String ssn;
+    private int id;
     @NotNull
+    @Column(name = "first_name")
     private String firstName;
     @NotNull
+    @Column(name = "last_name")
     private String lastName;
+    @OneToMany
+    private List<Course> courses;
+    @OneToOne
+    private ContactInfo contactInfo;
 
-    public String getSsn() {
-        return ssn;
+    public int getId() {
+        return id;
     }
 
-    public void setSsn(String ssn) {
-        this.ssn = ssn;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 
     public String getFirstName() {

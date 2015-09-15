@@ -1,7 +1,6 @@
 package com.chobi.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -11,21 +10,28 @@ import java.time.LocalDate;
  * Created by Chobii on 07/09/15.
  */
 
-@Entity(name = "course")
+@Entity
+@Table(name = "course")
 public class Course {
 
 
     @Id
     private int id;
     @NotNull
+    @Column(name = "course_name")
     private String courseName;
     @NotNull
     @Digits(fraction = 0, integer = 3)
     private int points;
     @NotNull
-    private LocalDate start;
+    @Column(name = "start_date")
+    private LocalDate startDate;
     @NotNull
-    private LocalDate end;
+    @Column(name = "end_date")
+    private LocalDate endDate;
+    @NotNull
+    @ManyToOne
+    private Teacher teacher;
 
     public int getId() {
         return id;
@@ -51,19 +57,27 @@ public class Course {
         this.points = points;
     }
 
-    public LocalDate getStart() {
-        return start;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setStart(LocalDate start) {
-        this.start = start;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
-    public LocalDate getEnd() {
-        return end;
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
-    public void setEnd(LocalDate end) {
-        this.end = end;
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 }

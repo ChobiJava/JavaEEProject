@@ -1,26 +1,26 @@
 package com.chobi.model;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
  * Created by Chobii on 08/09/15.
  */
-@Entity(name = "user")
+@Entity
+@Table(name = "user")
 public class User {
 
     @Id
     private int id;
     @NotNull
+    @Column(name = "user_name")
     private String userName;
     @NotNull
     @Size(min = 8, max = 16)
-    private String passWord;
+    private String password;
     @NotNull
+    @Column(name = "user_type")
     private UserType userType;
 
     public String getUserName() {
@@ -31,12 +31,20 @@ public class User {
         this.userName = userName;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public int getId() {
+        return id;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Enumerated(EnumType.ORDINAL)
