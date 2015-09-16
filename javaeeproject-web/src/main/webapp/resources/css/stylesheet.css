@@ -252,3 +252,15 @@ input {
     font-family: acki;
 }
 
+.studentPanel {
+    float: left;
+    margin: 40px;
+    width: 250px;
+}
+
+.hej {
+    margin: 0 auto;
+    width: 70%;
+
+}
+

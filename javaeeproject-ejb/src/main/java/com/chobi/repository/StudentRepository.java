@@ -19,7 +19,7 @@ public class StudentRepository {
     @Inject
     private EntityManager eManager;
 
-    public Student findBySsn(String ssn) {
+    public Student findBySsn(int ssn) {
         return (eManager.find(Student.class, ssn));
     }
 

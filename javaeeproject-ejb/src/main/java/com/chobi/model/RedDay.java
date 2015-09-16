@@ -1,9 +1,7 @@
 package com.chobi.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import java.time.LocalDate;
 
 /**
@@ -11,12 +9,10 @@ import java.time.LocalDate;
  */
 
 @Entity
-@Table(name = "red_day")
 public class RedDay {
 
     @Id
     private int id;
-    @Column(name = "red_day")
     private LocalDate redDay;
 
     public int getId() {

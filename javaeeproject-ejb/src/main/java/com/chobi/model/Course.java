@@ -11,7 +11,6 @@ import java.time.LocalDate;
  */
 
 @Entity
-@Table(name = "course")
 public class Course {
 
 
@@ -24,13 +23,12 @@ public class Course {
     @Digits(fraction = 0, integer = 3)
     private int points;
     @NotNull
-    @Column(name = "start_date")
     private LocalDate startDate;
     @NotNull
-    @Column(name = "end_date")
     private LocalDate endDate;
     @NotNull
     @ManyToOne
+    @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
     public int getId() {

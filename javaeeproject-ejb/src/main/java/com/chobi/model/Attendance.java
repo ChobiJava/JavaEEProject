@@ -8,8 +8,7 @@ import java.time.LocalDate;
  */
 
 @Entity
-@Table(name ="attendence")
-public class Attendence {
+public class Attendance {
 
     @Id
     private int id;
@@ -17,7 +16,6 @@ public class Attendence {
     private Student student;
     @OneToOne
     private Course course;
-    @Column(name = "date")
     private LocalDate schoolday;
 
 }

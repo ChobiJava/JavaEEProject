@@ -7,5 +7,5 @@ $(function() {
 });
 
 $(".ssso a:first").onclick(function() {
-    window.location.href="studentView.xhtml";
+    window.location.href="../../app/studentView.xhtml";
 });

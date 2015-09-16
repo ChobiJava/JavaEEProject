@@ -9,12 +9,14 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "user")
+@NamedQueries({
+        @NamedQuery(name = "user.findByUserNameAndPassword", query = "select u from User u where u.userName like :userName and u.password like :password")
+})
 public class User {
 
     @Id
     private int id;
     @NotNull
-    @Column(name = "user_name")
     private String userName;
     @NotNull
     @Size(min = 8, max = 16)

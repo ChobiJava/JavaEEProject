@@ -14,14 +14,13 @@ public class Student {
     @Id
     private int id;
     @NotNull
-    @Column(name = "first_name")
     private String firstName;
     @NotNull
-    @Column(name = "last_name")
     private String lastName;
     @NotNull
     private String ssn;
     @OneToOne
+    @JoinColumn(name = "contact_id")
     private ContactInfo contactInfo;
 
     public int getId() {

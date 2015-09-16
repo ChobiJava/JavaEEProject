@@ -21,7 +21,7 @@ CREATE TABLE `student` (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(45) NOT NULL,
+  `userName` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
   `user_type` int(4) not null,
   PRIMARY KEY (`id`)
@@ -30,8 +30,8 @@ CREATE TABLE `user` (
 DROP TABLE IF EXISTS `teacher`;
 CREATE TABLE `teacher` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(45) NOT NULL,
-  `last_name` varchar(45) NOT NULL,
+  `firstName` varchar(45) NOT NULL,
+  `lastName` varchar(45) NOT NULL,
   `user_id` int(11) not null,
   `contact_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -44,8 +44,8 @@ CREATE TABLE `course` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
 `course_name` varchar(20) NOT NULL,
 `points` int(11) NOT NULL,
-`start_date` DATE,
-`end_date` DATE,
+`startDate` DATE,
+`endDate` DATE,
 `teacher_id` INT(11) NOT NULL,
 PRIMARY KEY (`id`),
 CONSTRAINT `teacher_course_id` FOREIGN KEY (`teacher_id`) REFERENCES `teacher` (`id`)
@@ -54,7 +54,7 @@ CONSTRAINT `teacher_course_id` FOREIGN KEY (`teacher_id`) REFERENCES `teacher` (
 DROP TABLE IF EXISTS `red_day`;
 CREATE TABLE `red_day` (
   `id` int(11) NOT NULL,
-  `red_day` DATE,
+  `redDay` DATE,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -68,14 +68,14 @@ CONSTRAINT `student_student_course_id` FOREIGN KEY (`student_id`) REFERENCES `st
 CONSTRAINT `course_student_course_id` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `attendence`;
-CREATE TABLE `attendence` (
+DROP TABLE IF EXISTS `attendance`;
+CREATE TABLE `attendance` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) NOT NULL,
   `course_id` int(11) NOT NULL,
   `date` DATE not null,
   PRIMARY KEY (`id`),
-  CONSTRAINT `student_attendence_id` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`),
-  CONSTRAINT `course_attendence_id` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`)
+  CONSTRAINT `student_attendance_id` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`),
+  CONSTRAINT `course_attendance_id` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 

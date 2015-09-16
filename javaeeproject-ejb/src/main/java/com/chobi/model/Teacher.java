@@ -10,20 +10,53 @@ import java.util.List;
 
 @Entity
 @Table(name = "teacher")
+@NamedQueries({
+        @NamedQuery(name = "teachers.FindAll" , query = "select t from Teacher t")
+
+})
+
+@NamedEntityGraphs({
+        @NamedEntityGraph(
+                name = "graphDeep",
+                attributeNodes = {
+                        @NamedAttributeNode(value = "courses"),
+                        @NamedAttributeNode(value = "user"),
+                        @NamedAttributeNode(value = "contactInfo")
+                }
+        )
+})
 public class Teacher {
 
     @Id
     private int id;
     @NotNull
-    @Column(name = "first_name")
     private String firstName;
     @NotNull
-    @Column(name = "last_name")
     private String lastName;
-    @OneToMany
+    @OneToMany(mappedBy = "teacher")
     private List<Course> courses;
     @OneToOne
+    @JoinColumn(name = "contact_id")
     private ContactInfo contactInfo;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public ContactInfo getContactInfo() {
+        return contactInfo;
+    }
+
+    public void setContactInfo(ContactInfo contactInfo) {
+        this.contactInfo = contactInfo;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public int getId() {
         return id;
