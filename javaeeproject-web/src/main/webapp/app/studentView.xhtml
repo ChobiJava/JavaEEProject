@@ -20,12 +20,10 @@
             </f:facet>
 
             <h:outputText value="Name:" />
-            <h:outputText value="#{_student.firstName}" />
+            <h:outputText value="#{_student.firstName} #{_student.lastName}"/>
 
             <h:outputText value="SSN:" />
-            <h:commandLink action="#{studentController.blaha}" value="#{_student.ssn}">
-                <f:param name="student" value="#{_student.id}"/>
-            </h:commandLink>
+            <h:commandLink action="#{studentController.blaha(_student.id)}" value="#{_student.ssn}" />
         </p:panelGrid>
     </ui:repeat>
         </h:form>

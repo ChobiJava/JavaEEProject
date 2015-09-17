@@ -8,10 +8,8 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Produces;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.Map;
 
 /**
  * Created by Chobii on 08/09/15.
@@ -52,9 +50,7 @@ public class StudentController {
         newStudent = new Student();
     }
 
-    public String blaha() {
-        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        int id = Integer.parseInt(params.get("student"));
+    public String blaha(int id) {
         student = sRep.findBySsn(id);
         return "/app/student.xhtml?faces-redirect=true";
 
