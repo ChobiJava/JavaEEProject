@@ -1,9 +1,12 @@
 package com.chobi.model;
 
+import com.chobi.model.superclasses.SuperEntity;
+
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.List;
 
 
 /**
@@ -11,11 +14,8 @@ import java.time.LocalDate;
  */
 
 @Entity
-public class Course {
+public class Course extends SuperEntity{
 
-
-    @Id
-    private int id;
     @NotNull
     @Column(name = "course_name")
     private String courseName;
@@ -30,14 +30,8 @@ public class Course {
     @ManyToOne
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    @ManyToMany(mappedBy = "courses")
+    private List<Student> students;
 
     public String getCourseName() {
         return courseName;

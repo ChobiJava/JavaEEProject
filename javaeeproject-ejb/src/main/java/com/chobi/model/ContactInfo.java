@@ -1,10 +1,10 @@
 package com.chobi.model;
 
 
+import com.chobi.model.superclasses.SuperEntity;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
@@ -16,10 +16,8 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "contact_info")
-public class ContactInfo {
+public class ContactInfo extends SuperEntity {
 
-    @Id
-    private int id;
     @NotNull
     private String adress;
     @NotNull
@@ -32,14 +30,6 @@ public class ContactInfo {
     private String phone;
     @Email
     private String email;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getAdress() {
         return adress;

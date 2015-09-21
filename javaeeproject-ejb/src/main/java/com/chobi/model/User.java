@@ -1,5 +1,7 @@
 package com.chobi.model;
 
+import com.chobi.model.superclasses.SuperEntity;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -12,10 +14,8 @@ import javax.validation.constraints.Size;
 @NamedQueries({
         @NamedQuery(name = "user.findByUserNameAndPassword", query = "select u from User u where u.userName like :userName and u.password like :password")
 })
-public class User {
+public class User extends SuperEntity {
 
-    @Id
-    private int id;
     @NotNull
     private String userName;
     @NotNull
@@ -33,14 +33,6 @@ public class User {
         this.userName = userName;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -49,7 +41,7 @@ public class User {
         this.password = password;
     }
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     public UserType getUserType() {
         return userType;
     }

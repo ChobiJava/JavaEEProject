@@ -1,5 +1,7 @@
 package com.chobi.model;
 
+import com.chobi.model.superclasses.SuperEntity;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -8,10 +10,8 @@ import java.time.LocalDate;
  */
 
 @Entity
-public class Attendance {
+public class Attendance extends SuperEntity{
 
-    @Id
-    private int id;
     @OneToOne
     private Student student;
     @OneToOne

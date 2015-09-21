@@ -1,7 +1,8 @@
 package com.chobi.model;
 
+import com.chobi.model.superclasses.SuperEntity;
+
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.time.LocalDate;
 
 /**
@@ -9,19 +10,9 @@ import java.time.LocalDate;
  */
 
 @Entity
-public class RedDay {
+public class RedDay extends SuperEntity{
 
-    @Id
-    private int id;
     private LocalDate redDay;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public LocalDate getRedDay() {
         return redDay;

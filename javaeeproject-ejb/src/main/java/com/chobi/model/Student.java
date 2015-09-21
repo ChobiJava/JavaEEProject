@@ -1,7 +1,9 @@
 package com.chobi.model;
 
+import com.chobi.model.superclasses.HumanEntity;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * Created by Chobii on 07/09/15.
@@ -9,57 +11,13 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "student")
-public class Student {
+public class Student extends HumanEntity{
 
-    @Id
-    private int id;
-    @NotNull
-    private String firstName;
-    @NotNull
-    private String lastName;
-    @NotNull
-    private String ssn;
-    @OneToOne
-    @JoinColumn(name = "contact_id")
-    private ContactInfo contactInfo;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public ContactInfo getContactInfo() {
-        return contactInfo;
-    }
-
-    public void setContactInfo(ContactInfo contactInfo) {
-        this.contactInfo = contactInfo;
-    }
-
-    public String getSsn() {
-        return ssn;
-    }
-
-    public void setSsn(String ssn) {
-        this.ssn = ssn;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    @ManyToMany
+    @JoinTable(
+            name = "student_course",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private List<Course> courses;
 }

@@ -1,7 +1,8 @@
 package com.chobi.model;
 
+import com.chobi.model.superclasses.EmployeeEntity;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -25,46 +26,10 @@ import java.util.List;
                 }
         )
 })
-public class Teacher {
+public class Teacher extends EmployeeEntity {
 
-    @Id
-    private int id;
-    @NotNull
-    private String firstName;
-    @NotNull
-    private String lastName;
     @OneToMany(mappedBy = "teacher")
     private List<Course> courses;
-    @OneToOne
-    @JoinColumn(name = "contact_id")
-    private ContactInfo contactInfo;
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    public ContactInfo getContactInfo() {
-        return contactInfo;
-    }
-
-    public void setContactInfo(ContactInfo contactInfo) {
-        this.contactInfo = contactInfo;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public List<Course> getCourses() {
         return courses;
@@ -74,19 +39,4 @@ public class Teacher {
         this.courses = courses;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 }

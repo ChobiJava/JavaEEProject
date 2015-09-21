@@ -23,7 +23,7 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userName` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
-  `user_type` int(4) not null,
+  `user_type` VARCHAR(45) not null,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
