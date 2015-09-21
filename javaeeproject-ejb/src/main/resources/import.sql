@@ -4,6 +4,8 @@ CREATE TABLE `contact_info` (
   `adress` VARCHAR(45) NOT NULL,
   `zip` INT(5) NOT NULL,
   `city` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `phone` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -78,4 +80,8 @@ CREATE TABLE `attendance` (
   CONSTRAINT `student_attendance_id` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`),
   CONSTRAINT `course_attendance_id` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+
+
+
 

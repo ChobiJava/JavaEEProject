@@ -11,7 +11,6 @@ import java.util.logging.Logger;
  */
 public class Resources {
 
-
     @Produces
     @PersistenceContext
     private EntityManager eManager;

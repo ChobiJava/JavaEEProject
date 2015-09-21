@@ -41,7 +41,7 @@ public class User extends SuperEntity {
         this.password = password;
     }
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     public UserType getUserType() {
         return userType;
     }

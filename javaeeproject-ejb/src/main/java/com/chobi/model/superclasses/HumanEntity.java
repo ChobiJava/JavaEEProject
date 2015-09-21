@@ -3,6 +3,7 @@ package com.chobi.model.superclasses;
 import com.chobi.model.ContactInfo;
 
 import javax.persistence.JoinColumn;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
@@ -10,6 +11,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by Chobii on 21/09/15.
  */
+@MappedSuperclass
 public abstract class HumanEntity extends SuperEntity {
 
 

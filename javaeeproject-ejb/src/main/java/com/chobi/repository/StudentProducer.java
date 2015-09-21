@@ -3,11 +3,11 @@ package com.chobi.repository;
 import com.chobi.model.Student;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.event.Reception;
 import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
 
@@ -18,8 +18,8 @@ import java.util.List;
 @RequestScoped
 public class StudentProducer {
 
-    @Inject
-    StudentRepository sRepository;
+    @EJB
+    CRUDRepository service;
 
     private List<Student> students;
 
@@ -35,7 +35,11 @@ public class StudentProducer {
 
     @PostConstruct
     public void retrieveAllStudents() {
-        students = sRepository.findAllOrderedByName();
+        students = service.findByNamedQuery(
+                Student.class,
+                Student.FIND_ALL,
+                "student.withContactInfo"
+        );
     }
 
 

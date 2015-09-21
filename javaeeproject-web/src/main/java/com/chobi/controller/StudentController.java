@@ -1,7 +1,6 @@
 package com.chobi.controller;
 
 import com.chobi.model.Student;
-import com.chobi.repository.StudentRepository;
 import com.chobi.service.StudentRegistration;
 
 import javax.annotation.PostConstruct;
@@ -19,11 +18,6 @@ import javax.inject.Named;
 public class StudentController {
 
     private Student newStudent;
-    private Student student;
-
-    public Student getStudent() {
-        return student;
-    }
 
     @Produces
     @Named
@@ -33,8 +27,6 @@ public class StudentController {
 
     @Inject
     StudentRegistration sRegistration;
-    @Inject
-    StudentRepository sRep;
 
     public void register() {
         try {
@@ -50,9 +42,4 @@ public class StudentController {
         newStudent = new Student();
     }
 
-    public String blaha(int id) {
-        student = sRep.findBySsn(id);
-        return "/app/student.xhtml?faces-redirect=true";
-
-    }
 }
