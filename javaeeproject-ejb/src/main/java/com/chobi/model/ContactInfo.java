@@ -2,7 +2,6 @@ package com.chobi.model;
 
 
 import com.chobi.model.superclasses.SuperEntity;
-import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -28,7 +27,6 @@ public class ContactInfo extends SuperEntity {
     @NotNull
     @Digits(fraction = 0, integer = 12)
     private String phone;
-    @Email
     private String email;
 
     public String getAdress() {

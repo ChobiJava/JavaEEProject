@@ -10,11 +10,14 @@ import java.time.LocalDate;
  */
 
 @Entity
+@Table(name = "attendance")
 public class Attendance extends SuperEntity{
 
     @OneToOne
+    @JoinColumn(name = "student_id")
     private Student student;
     @OneToOne
+    @JoinColumn(name = "course_id")
     private Course course;
     private LocalDate schoolday;
 

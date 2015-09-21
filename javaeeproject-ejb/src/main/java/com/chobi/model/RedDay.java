@@ -3,6 +3,7 @@ package com.chobi.model;
 import com.chobi.model.superclasses.SuperEntity;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.LocalDate;
 
 /**
@@ -10,6 +11,7 @@ import java.time.LocalDate;
  */
 
 @Entity
+@Table(name = "red_day")
 public class RedDay extends SuperEntity{
 
     private LocalDate redDay;
