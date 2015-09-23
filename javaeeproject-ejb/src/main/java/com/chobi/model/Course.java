@@ -5,7 +5,7 @@ import com.chobi.model.superclasses.SuperEntity;
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 
@@ -24,14 +24,18 @@ public class Course extends SuperEntity{
     @Digits(fraction = 0, integer = 3)
     private int points;
     @NotNull
-    private LocalDate startDate;
+    @Temporal(TemporalType.DATE)
+    private Date startDate;
     @NotNull
-    private LocalDate endDate;
+    @Temporal(TemporalType.DATE)
+    private Date endDate;
     @NotNull
     @ManyToOne
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
-    @ManyToMany(mappedBy = "courses")
+    @ManyToMany(targetEntity = com.chobi.model.Student.class,
+            mappedBy = "courses"
+    )
     private List<Student> students;
 
     public String getCourseName() {
@@ -50,27 +54,35 @@ public class Course extends SuperEntity{
         this.points = points;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
     public Teacher getTeacher() {
         return teacher;
     }
 
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 }

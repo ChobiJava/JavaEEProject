@@ -4,7 +4,9 @@ import com.chobi.model.superclasses.SuperEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.time.LocalDate;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.util.Date;
 
 /**
  * Created by Chobii on 15/09/15.
@@ -14,13 +16,14 @@ import java.time.LocalDate;
 @Table(name = "red_day")
 public class RedDay extends SuperEntity{
 
-    private LocalDate redDay;
+    @Temporal(TemporalType.DATE)
+    private Date redDay;
 
-    public LocalDate getRedDay() {
+    public Date getRedDay() {
         return redDay;
     }
 
-    public void setRedDay(LocalDate redDay) {
+    public void setRedDay(Date redDay) {
         this.redDay = redDay;
     }
 }
