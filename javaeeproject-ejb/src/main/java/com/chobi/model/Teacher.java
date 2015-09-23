@@ -12,13 +12,13 @@ import java.util.List;
 @Entity
 @Table(name = "teacher")
 @NamedQueries({
-        @NamedQuery(name = "teachers.FindAll" , query = "select t from Teacher t")
+        @NamedQuery(name = Teacher.FIND_ALL , query = "select t from Teacher t")
 
 })
 
 @NamedEntityGraphs({
         @NamedEntityGraph(
-                name = "graphDeep",
+                name = Teacher.GRAPH_DEEP,
                 attributeNodes = {
                         @NamedAttributeNode(value = "courses"),
                         @NamedAttributeNode(value = "user"),
@@ -27,6 +27,9 @@ import java.util.List;
         )
 })
 public class Teacher extends EmployeeEntity {
+
+    public static final String FIND_ALL = "teacher.FindAll";
+    public static final String GRAPH_DEEP = "deep";
 
     @OneToMany(mappedBy = "teacher")
     private List<Course> courses;

@@ -14,6 +14,7 @@ import java.util.List;
  */
 
 @Entity
+@Table(name = "course")
 public class Course extends SuperEntity{
 
     @NotNull
@@ -30,7 +31,9 @@ public class Course extends SuperEntity{
     @ManyToOne
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
-    @ManyToMany(mappedBy = "courses")
+    @ManyToMany(targetEntity = com.chobi.model.Student.class,
+            mappedBy = "courses"
+    )
     private List<Student> students;
 
     public String getCourseName() {
@@ -49,6 +52,14 @@ public class Course extends SuperEntity{
         this.points = points;
     }
 
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
     public LocalDate getStartDate() {
         return startDate;
     }
@@ -65,11 +76,11 @@ public class Course extends SuperEntity{
         this.endDate = endDate;
     }
 
-    public Teacher getTeacher() {
-        return teacher;
+    public List<Student> getStudents() {
+        return students;
     }
 
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 }

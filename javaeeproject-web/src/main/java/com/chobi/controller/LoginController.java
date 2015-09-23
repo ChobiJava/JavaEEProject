@@ -18,7 +18,6 @@ import javax.servlet.http.HttpSession;
 @SessionScoped
 public class LoginController {
 
-
     private String userName;
     private String password;
 

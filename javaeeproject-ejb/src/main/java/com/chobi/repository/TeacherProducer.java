@@ -3,9 +3,9 @@ package com.chobi.repository;
 import com.chobi.model.Teacher;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
 
@@ -16,8 +16,8 @@ import java.util.List;
 @RequestScoped
 public class TeacherProducer {
 
-    @Inject
-    TeacherRepository tRepository;
+    @EJB
+    CRUDRepository repo;
 
     private List<Teacher> teachers;
 
@@ -29,6 +29,10 @@ public class TeacherProducer {
 
     @PostConstruct
     public void retrieveAllTeachers() {
-        teachers = tRepository.findAllOrderedByName();
+        teachers = repo.findByNamedQuery(
+                Teacher.class,
+                Teacher.FIND_ALL,
+                Teacher.GRAPH_DEEP
+        );
     }
 }

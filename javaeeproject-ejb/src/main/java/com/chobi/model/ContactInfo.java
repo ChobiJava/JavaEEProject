@@ -28,6 +28,7 @@ public class ContactInfo extends SuperEntity {
     @NotNull
     @Digits(fraction = 0, integer = 12)
     private String phone;
+    @NotNull
     @Email
     private String email;
 

@@ -30,8 +30,8 @@
                                 <h:inputSecret value="#{loginController.password}" styleClass="login-input" a:placeholder="Password"/>
                             </li>
                             <li>
-                                <h:commandButton styleClass="btn" id="login-btn" value="LOGIN" action="#{loginController.login}"/>
-                                <h:commandLink action="#{navigationBean.redirectToAdmin}"/>
+                                <h:commandButton styleClass="btn" id="login-btn" value="LOGIN" action="#{loginController.login()}"/>
+                                <h:commandLink action="#{navigationBean.redirectToAdmin()}"/>
                             </li>
                         </ul>
                         <br/>
