@@ -29,7 +29,8 @@ import java.util.List;
 public class Teacher extends EmployeeEntity {
 
     public static final String FIND_ALL = "teacher.FindAll";
-    public static final String GRAPH_DEEP = "deep";
+    public static final String GRAPH_DEEP = "teacher.Deep";
+    public static final String GRAPH_COURSE = "teacher.WithCourses";
 
     @OneToMany(mappedBy = "teacher")
     private List<Course> courses;
