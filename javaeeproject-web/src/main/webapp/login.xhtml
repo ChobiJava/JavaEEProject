@@ -24,13 +24,13 @@
                         <p:growl sticky="false" showDetail="true" life="2000"/>
                         <ul>
                             <li>
-                                <h:inputText value="#{loginController.userName}" styleClass="login-input" a:placeholder="Username"/>
+                                <h:inputText value="#{sessionManager.userName}" styleClass="login-input" a:placeholder="Username"/>
                             </li>
                             <li>
-                                <h:inputSecret value="#{loginController.password}" styleClass="login-input" a:placeholder="Password"/>
+                                <h:inputSecret value="#{sessionManager.password}" styleClass="login-input" a:placeholder="Password"/>
                             </li>
                             <li>
-                                <h:commandButton styleClass="btn" id="login-btn" value="LOGIN" action="#{loginController.login()}"/>
+                                <h:commandButton styleClass="btn" id="login-btn" value="LOGIN" action="#{sessionManager.login()}"/>
                                 <h:commandLink action="#{navigationBean.redirectToAdmin()}"/>
                             </li>
                         </ul>

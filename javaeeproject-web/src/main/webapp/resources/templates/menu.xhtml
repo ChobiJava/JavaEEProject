@@ -4,10 +4,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core" >
 <f:view>
     <ui:composition>
-        <div class="menu">
+
+        <h:panelGroup layout="block" styleClass="menu" rendered="#{!sessionManager.principal}">
             <ul>
                 <li><h:form><h:commandLink action="#{navigationBean.redirectToAdmin}" value="HOME"/> </h:form></li>
                 <li class='active has-sub'><a href='#'><span>Courses</span></a>
@@ -32,11 +33,42 @@
                 <li class='active has-sub last'><a href='#'><span class="fa fa-user"></span></a>
                     <ul>
                         <li><h:form><h:commandLink action="#{navigationBean.redirectToLogin}" value="Profile"/> </h:form></li>
-                        <li><h:form><h:commandLink action="#{loginController.logout}" value="Logout" /> </h:form></li>
+                        <li><h:form><h:commandLink action="#{sessionManager.logout}" value="Logout" /> </h:form></li>
                     </ul>
                 </li>
             </ul>
-        </div>
+        </h:panelGroup>
+
+        <h:panelGroup layout="block" styleClass="menu" rendered="#{sessionManager.principal}">
+            <ul>
+                <li><h:form><h:commandLink action="#{navigationBean.redirectToAdmin}" value="HOME"/> </h:form></li>
+                <li class='active has-sub'><a href='#'><span>Teachers</span></a>
+                    <ul>
+                        <li><h:form><h:commandLink action="#{navigationBean.redirectToLogin}" value="All Teachers"/> </h:form></li>
+                        <li><h:form><h:commandLink action="#{navigationBean.redirectToLogin}" value="Add Teacher" /> </h:form></li>
+                    </ul>
+                </li>
+                <li class='active has-sub'><a href='#'><span>Students</span></a>
+                    <ul>
+                        <li><h:form><h:commandLink action="#{navigationBean.redirectToLogin}" value="All Students" /> </h:form></li>
+                        <li><h:form><h:commandLink action="#{navigationBean.redirectToLogin}" value="Add Student"/> </h:form></li>
+                    </ul>
+                </li>
+                <li class='active has-sub'><a href='#'><span>Attendance</span></a>
+                    <ul>
+                        <li><h:form><h:commandLink action="#{navigationBean.redirectToLogin}" value="Manage Schooldays"/> </h:form></li>
+                        <li><h:form><h:commandLink action="#{navigationBean.redirectToLogin}" value="View Attendance"/> </h:form></li>
+                    </ul>
+                </li>
+                <li><a href='#'><span>Statistics</span></a></li>
+                <li class='active has-sub last'><a href='#'><span class="fa fa-user"></span></a>
+                    <ul>
+                        <li><h:form><h:commandLink action="#{navigationBean.redirectToLogin}" value="Profile"/> </h:form></li>
+                        <li><h:form><h:commandLink action="#{sessionManager.logout}" value="Logout" /> </h:form></li>
+                    </ul>
+                </li>
+            </ul>
+        </h:panelGroup>
     </ui:composition>
 </f:view>
 </html>

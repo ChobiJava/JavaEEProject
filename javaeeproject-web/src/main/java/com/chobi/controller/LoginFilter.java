@@ -18,7 +18,7 @@ public class LoginFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        LoginController lController = (LoginController) ((HttpServletRequest)servletRequest).getSession().getAttribute("loginController");
+        SessionManager lController = (SessionManager) ((HttpServletRequest)servletRequest).getSession().getAttribute("loginController");
 
         if (lController == null || !lController.isLoggedIn()) {
             String contextPath = ((HttpServletRequest)servletRequest).getContextPath();

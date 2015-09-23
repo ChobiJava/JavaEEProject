@@ -16,12 +16,21 @@ import javax.servlet.http.HttpSession;
 
 @ManagedBean
 @SessionScoped
-public class LoginController {
+public class SessionManager {
 
     private String userName;
     private String password;
 
     private boolean loggedIn;
+    private boolean principal = true;
+
+    public boolean isPrincipal() {
+        return principal;
+    }
+
+    public void setPrincipal(boolean principal) {
+        this.principal = principal;
+    }
 
     public boolean isLoggedIn() {
         return loggedIn;
