@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <ui:composition>
+        <div class="menu">
+            <ul>
+                <li><h:form><h:commandLink action="#{navigationBean.redirectToAdmin}" value="HOME"/> </h:form></li>
+                <li class='active has-sub'><a href='#'><span>Courses</span></a>
+                    <ul>
+                        <li><h:form><h:commandLink action="#{navigationBean.redirectToLogin}" value="My Courses"/> </h:form></li>
+                        <li><h:form><h:commandLink action="#{navigationBean.redirectToLogin}" value="All Courses" /> </h:form></li>
+                    </ul>
+                </li>
+                <li class='active has-sub'><a href='#'><span>Students</span></a>
+                    <ul>
+                        <li><h:form><h:commandLink action="#{navigationBean.redirectToLogin}" value="My Students"/> </h:form></li>
+                        <li><h:form><h:commandLink action="#{navigationBean.redirectToLogin}" value="All Students" /> </h:form></li>
+                    </ul>
+                </li>
+                <li class='active has-sub'><a href='#'><span>Attendance</span></a>
+                    <ul>
+                        <li><h:form><h:commandLink action="#{navigationBean.redirectToLogin}" value="Take Attendance"/> </h:form></li>
+                        <li><h:form><h:commandLink action="#{navigationBean.redirectToLogin}" value="View Attendance"/> </h:form></li>
+                    </ul>
+                </li>
+                <li><a href='#'><span>About</span></a></li>
+                <li class='active has-sub last'><a href='#'><span class="fa fa-user"></span></a>
+                    <ul>
+                        <li><h:form><h:commandLink action="#{navigationBean.redirectToLogin}" value="Profile"/> </h:form></li>
+                        <li><h:form><h:commandLink action="#{loginController.logout}" value="Logout" /> </h:form></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </ui:composition>
+</f:view>
+</html>
