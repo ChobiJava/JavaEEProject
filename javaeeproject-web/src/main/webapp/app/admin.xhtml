@@ -9,29 +9,9 @@
 <h:head>
 </h:head>
 <h:body>
-    <h:outputStylesheet library="css" name="stylesheet.css" />
-    <h:outputScript library="javascript" name="javascript.js"/>
     <f:view>
-    <ui:include src="../resources/templates/header.xhtml" />
-    <h:panelGroup styleClass="menu-div" layout="block">
-        <h:dataTable var="_member" value="#{students}" styleClass="simpletablestyle">
-            <h:column>
-                <f:facet name="header">Id</f:facet>
-                #{_member.id}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Name</f:facet>
-                #{_member.contactInfo.adress}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Email</f:facet>
-                #{_member.contactInfo.email}
-            </h:column>
-        </h:dataTable>
-    </h:panelGroup>
-        <h:form>
-            <h:commandButton action="#{navigationBean.redirectToStudentView}" />
-        </h:form>
-</f:view>
+        <ui:include src="../resources/templates/header.xhtml" />
+        <ui:include src="../resources/templates/menu.xhtml" />
+    </f:view>
 </h:body>
 </html>

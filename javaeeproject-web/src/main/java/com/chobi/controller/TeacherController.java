@@ -1,6 +1,6 @@
 package com.chobi.controller;
 
-import com.chobi.model.Teacher;
+import com.chobi.business.entities.Teacher;
 import com.chobi.service.TeacherRegistration;
 
 import javax.annotation.PostConstruct;

@@ -1,6 +1,7 @@
-package com.chobi.repository;
+package com.chobi.boundary.facades;
 
-import com.chobi.model.Teacher;
+import com.chobi.business.service.CRUDRepository;
+import com.chobi.business.entities.Teacher;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;

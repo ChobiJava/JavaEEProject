@@ -1,4 +1,4 @@
-package com.chobi.model.superclasses;
+package com.chobi.business.entities.superclasses;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

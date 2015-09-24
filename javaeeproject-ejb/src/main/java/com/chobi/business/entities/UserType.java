@@ -1,4 +1,4 @@
-package com.chobi.model;
+package com.chobi.business.entities;
 
 public enum UserType {
 

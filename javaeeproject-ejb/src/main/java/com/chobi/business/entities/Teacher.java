@@ -1,6 +1,6 @@
-package com.chobi.model;
+package com.chobi.business.entities;
 
-import com.chobi.model.superclasses.EmployeeEntity;
+import com.chobi.business.entities.superclasses.EmployeeEntity;
 
 import javax.persistence.*;
 import java.util.List;

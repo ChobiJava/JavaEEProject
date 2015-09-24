@@ -1,10 +1,10 @@
 package com.chobi.service;
 
-import com.chobi.model.Teacher;
+import com.chobi.business.entities.Teacher;
+import com.chobi.business.service.CRUDRepository;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
 
 /**
  * Created by Chobii on 16/09/15.
@@ -13,12 +13,12 @@ import javax.persistence.EntityManager;
 @Stateless
 public class TeacherRegistration {
 
-    @Inject
-    private EntityManager em;
+    @EJB
+    private CRUDRepository crudRepository;
 
     public void register(Teacher teacher) {
         try {
-            em.persist(teacher);
+            crudRepository.create(teacher);
         } catch (Exception e) {
             e.printStackTrace();
         }

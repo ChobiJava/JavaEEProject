@@ -1,7 +1,7 @@
-package com.chobi.model;
+package com.chobi.business.entities;
 
 
-import com.chobi.model.superclasses.SuperEntity;
+import com.chobi.business.entities.superclasses.SuperEntity;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.Entity;

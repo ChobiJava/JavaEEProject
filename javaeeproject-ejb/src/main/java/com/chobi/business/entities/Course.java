@@ -1,6 +1,6 @@
-package com.chobi.model;
+package com.chobi.business.entities;
 
-import com.chobi.model.superclasses.SuperEntity;
+import com.chobi.business.entities.superclasses.SuperEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
@@ -31,7 +31,7 @@ public class Course extends SuperEntity{
     @ManyToOne
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
-    @ManyToMany(targetEntity = com.chobi.model.Student.class,
+    @ManyToMany(targetEntity = Student.class,
             mappedBy = "courses"
     )
     private List<Student> students;

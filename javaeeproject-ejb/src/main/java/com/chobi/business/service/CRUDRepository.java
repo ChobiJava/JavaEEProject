@@ -1,4 +1,4 @@
-package com.chobi.repository;
+package com.chobi.business.service;
 
 import java.util.List;
 import java.util.Map;
@@ -15,5 +15,5 @@ public interface CRUDRepository {
     <T> List<T> findByNamedQuery(Class<T> entityClass, String queryName);
     <T> List<T> findByNamedQuery(Class<T> entityClass, String queryName, int resultLimit);
     <T> List<T> findByNamedQuery(Class<T> entityClass, String queryName, String entityGraph);
-    <T> List<T> findByNamedQuery(Class<T> entityClass, String queryName, Map parameters, int resultLimit);
+    <T> List<T> findByNamedQuery(Class<T> entityClass, String queryName, Map parameters);
 }

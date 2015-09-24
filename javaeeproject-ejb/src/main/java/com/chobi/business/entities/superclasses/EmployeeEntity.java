@@ -1,6 +1,6 @@
-package com.chobi.model.superclasses;
+package com.chobi.business.entities.superclasses;
 
-import com.chobi.model.User;
+import com.chobi.business.entities.User;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;

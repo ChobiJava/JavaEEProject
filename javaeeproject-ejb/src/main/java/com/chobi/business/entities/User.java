@@ -1,6 +1,6 @@
-package com.chobi.model;
+package com.chobi.business.entities;
 
-import com.chobi.model.superclasses.SuperEntity;
+import com.chobi.business.entities.superclasses.SuperEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,9 +12,11 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "user")
 @NamedQueries({
-        @NamedQuery(name = "user.findByUserNameAndPassword", query = "select u from User u where u.userName like :userName and u.password like :password")
+        @NamedQuery(name = User.FIND_BY_USERNAME_AND_PASSWORD, query = "select u from User u where u.userName like :userName and u.password like :password")
 })
 public class User extends SuperEntity {
+
+    public static final String FIND_BY_USERNAME_AND_PASSWORD = "user.findByUserNameAndPassword";
 
     @NotNull
     private String userName;

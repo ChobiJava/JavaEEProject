@@ -1,6 +1,6 @@
-package com.chobi.model;
+package com.chobi.business.entities;
 
-import com.chobi.model.superclasses.HumanEntity;
+import com.chobi.business.entities.superclasses.HumanEntity;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,7 +27,7 @@ public class Student extends HumanEntity{
 
     public static final String FIND_ALL = "student.findAll";
 
-    @ManyToMany(targetEntity = com.chobi.model.Course.class)
+    @ManyToMany(targetEntity = Course.class)
     @JoinTable(name = "student_courses",
             joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id")

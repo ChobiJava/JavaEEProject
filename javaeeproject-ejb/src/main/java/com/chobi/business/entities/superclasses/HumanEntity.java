@@ -1,6 +1,6 @@
-package com.chobi.model.superclasses;
+package com.chobi.business.entities.superclasses;
 
-import com.chobi.model.ContactInfo;
+import com.chobi.business.entities.ContactInfo;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;

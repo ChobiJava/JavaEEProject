@@ -1,17 +1,23 @@
-package com.chobi.repository;
+package com.chobi.business.service;
+
+import com.chobi.boundary.logging.BoundaryLogger;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Chobii on 21/09/15.
  */
 @Stateless
 @Local(CRUDRepository.class)
+@Interceptors(BoundaryLogger.class)
 public class CRUDService implements CRUDRepository {
 
     private static final String HINT = "javax.persistence.fetchgraph";
@@ -62,7 +68,13 @@ public class CRUDService implements CRUDRepository {
     }
 
     @Override
-    public <T> List<T> findByNamedQuery(Class<T> entityClass, String queryName, Map parameters, int resultLimit) {
-        return null;
+    public <T> List<T> findByNamedQuery(Class<T> entityClass, String queryName, Map parameters) {
+        Set<Map.Entry> params = parameters.entrySet();
+        Query query = em.createNamedQuery(queryName, entityClass);
+        for (Map.Entry entry : params) {
+            query.setParameter(entry.getKey().toString(), entry.getValue());
+        }
+
+        return query.getResultList();
     }
 }
