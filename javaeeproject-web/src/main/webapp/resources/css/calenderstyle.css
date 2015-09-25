@@ -1,0 +1,14 @@
+/*Styles for primefaces calender*/
+.ui-datepicker {
+    width: 70% !important;
+    margin: 2% auto;
+}
+
+.ui-datepicker td {
+    height: 100px;
+    border: 1px solid black !important;
+}
+.ui-state-disabled, .ui-widget-content .ui-state-disabled span {
+    color: red;
+}
+

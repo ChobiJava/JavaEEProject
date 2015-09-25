@@ -4,32 +4,32 @@ import com.chobi.business.entities.User;
 import com.chobi.business.service.CRUDRepository;
 import com.chobi.business.service.QueryParams;
 
-import javax.ejb.EJB;
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import java.io.Serializable;
 
 /**
  * Created by Chobii on 16/09/15.
  */
 
-@ApplicationScoped
-public class UserRepository {
+@RequestScoped
+public class UserRepository implements Serializable {
 
-    @EJB
+    @Inject
     private CRUDRepository crudRepository;
 
-    public boolean findUser(String userName, String password) {
+    public User findUser(String userName, String password) {
         try {
-            User user = crudRepository.findByNamedQuery(
+            return crudRepository.findByNamedQuery(
                     User.class,
                     User.FIND_BY_USERNAME_AND_PASSWORD,
                     QueryParams.with("userName", userName)
                                .and("password", password)
                                .parameters()
             ).get(0);
-            return user != null;
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 }

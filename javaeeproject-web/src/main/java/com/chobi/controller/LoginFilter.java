@@ -1,6 +1,7 @@
 package com.chobi.controller;
 
 
+import javax.inject.Inject;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,9 @@ import java.io.IOException;
  */
 public class LoginFilter implements Filter {
 
+    @Inject
+    private SessionManager sm;
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -18,9 +22,8 @@ public class LoginFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        SessionManager lController = (SessionManager) ((HttpServletRequest)servletRequest).getSession().getAttribute("sessionManager");
 
-        if (lController == null || !lController.isLoggedIn()) {
+        if (sm == null || !sm.isLoggedIn()) {
             String contextPath = ((HttpServletRequest)servletRequest).getContextPath();
             ((HttpServletResponse)servletResponse).sendRedirect(contextPath + "/login.xhtml");
         }

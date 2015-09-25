@@ -6,12 +6,14 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
         xmlns:p="http://primefaces.org/ui">
-
-<ui:composition>
-    <h:head>
-        <h:outputStylesheet library="css" name="header.css" />
-        <h:outputStylesheet library="css" name="stylesheet.css" />
-        <h:outputStylesheet library="css" name="calenderstyle.css" />
-    </h:head>
-</ui:composition>
+<f:view>
+    <ui:include src="../resources/templates/header.xhtml" />
+    <ui:include src="../resources/templates/menu.xhtml" />
+    <ui:repeat value="#{courseManager.forTeacher()}" var="_course">
+        <p:panelGrid columns="1">
+            <h:outputText value="#{_course.courseName}" />
+            <h:outputText value="#{_course.points}" />
+        </p:panelGrid>
+    </ui:repeat>
+</f:view>
 </html>

@@ -13,9 +13,24 @@ import java.util.List;
  * Created by Chobii on 07/09/15.
  */
 
+@NamedQueries({
+        @NamedQuery(name = Course.FIND_ALL, query = "select c from Course c")
+})
+@NamedEntityGraphs({
+        @NamedEntityGraph(name = Course.GRAPH_DEEP,
+        attributeNodes = {
+                @NamedAttributeNode("teacher")
+        },
+        subgraphs = @NamedSubgraph(name = Teacher.GRAPH_DEEP,
+        attributeNodes = @NamedAttributeNode("user")))
+})
+
 @Entity
 @Table(name = "course")
 public class Course extends SuperEntity{
+
+    public static final String FIND_ALL = "course.FindAll";
+    public static final String GRAPH_DEEP = "course.Deep";
 
     @NotNull
     @Column(name = "course_name")

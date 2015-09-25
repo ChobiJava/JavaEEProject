@@ -13,8 +13,8 @@
                 <li><h:form><h:commandLink action="#{navigationBean.redirectToAdmin}" value="HOME"/> </h:form></li>
                 <li class='active has-sub'><a href='#'><span>Courses</span></a>
                     <ul>
-                        <li><h:form><h:commandLink action="#{navigationBean.redirectToLogin}" value="My Courses"/> </h:form></li>
-                        <li><h:form><h:commandLink action="#{navigationBean.redirectToLogin}" value="All Courses" /> </h:form></li>
+                        <li><h:form><h:commandLink action="#{navigationBean.redirectToMyCourses}" value="My Courses"/> </h:form></li>
+                        <li><h:form><h:commandLink action="#{navigationBean.redirectToCourses}" value="All Courses" /> </h:form></li>
                     </ul>
                 </li>
                 <li class='active has-sub'><a href='#'><span>Students</span></a>
@@ -56,7 +56,7 @@
                 </li>
                 <li class='active has-sub'><a href='#'><span>Attendance</span></a>
                     <ul>
-                        <li><h:form><h:commandLink action="#{navigationBean.redirectToLogin}" value="Manage Schooldays"/> </h:form></li>
+                        <li><h:form><h:commandLink action="#{navigationBean.redirectToSchoolDays}" value="Manage Schooldays"/> </h:form></li>
                         <li><h:form><h:commandLink action="#{navigationBean.redirectToLogin}" value="View Attendance"/> </h:form></li>
                     </ul>
                 </li>

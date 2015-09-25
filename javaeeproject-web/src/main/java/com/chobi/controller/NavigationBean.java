@@ -1,15 +1,15 @@
 package com.chobi.controller;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 import java.io.Serializable;
 
 /**
  * Created by Chobii on 16/09/15.
  */
 
-@ManagedBean
-@SessionScoped
+@Named
+@ApplicationScoped
 public class NavigationBean implements Serializable {
 
     public String redirectToLogin() {
@@ -30,6 +30,18 @@ public class NavigationBean implements Serializable {
 
     public String redirectToStudentView() {
         return "/app/studentView.xhtml?faces-redirect=true";
+    }
+
+    public String redirectToCourses() {
+        return "/app/courses.xhtml?faces-redirect=true";
+    }
+
+    public String redirectToMyCourses() {
+        return "/app/my-courses.xhtml?faces-redirect=true";
+    }
+
+    public String redirectToSchoolDays() {
+        return "/app/school-days.xhtml?faces-redirect=true";
     }
 
 

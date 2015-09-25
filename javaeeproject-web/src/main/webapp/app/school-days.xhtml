@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:fn="http://java.sun.com/jstl/functions">
+<ui:include src="../resources/templates/header.xhtml" />
+<body>
+<script type="text/javascript">
+
+    var disabledDays = ["09-25-2015"];
+    function disableAllTheseDays(date) {
+        var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
+        for (i = 0; i &lt; disabledDays.length; i++) {
+            if($.inArray((m+1) + '-' + d + '-' + y,disabledDays) != -1) {
+                return [false];
+            }
+        }
+        return [true];
+    }
+
+</script>
+<f:view>
+
+    <ui:include src="../resources/templates/menu.xhtml" />
+    <p:calendar value="#{redDayCalender.date}" mode="inline" pattern="MM-dd-yyyy" beforeShowDay="disableAllTheseDays"/>
+</f:view>
+</body>
+</html>

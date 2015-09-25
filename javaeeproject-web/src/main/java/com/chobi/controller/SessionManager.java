@@ -1,28 +1,33 @@
 package com.chobi.controller;
 
+import com.chobi.business.entities.User;
 import com.chobi.service.UserRepository;
 
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.http.HttpSession;
+import java.io.Serializable;
 
 /**
  * Created by Chobii on 08/09/15.
  */
 
-@ManagedBean
+@Named(value = "sessionManager")
 @SessionScoped
-public class SessionManager {
+public class SessionManager implements Serializable {
 
     private String userName;
     private String password;
-
     private boolean loggedIn;
     private boolean principal = true;
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
 
     public boolean isPrincipal() {
         return principal;
@@ -57,23 +62,17 @@ public class SessionManager {
     }
 
     @Inject
-    private FacesContext fContext;
-
-    @Inject
     private UserRepository uRep;
 
-    @ManagedProperty(value = "#{navigationBean}")
+    @Inject
     private NavigationBean navBean;
 
-    public void setNavBean(NavigationBean navBean) {
-        this.navBean = navBean;
-    }
-
     public String login() {
-        if (uRep.findUser(userName, password)) {
+        if ((user = uRep.findUser(userName, password)) != null) {
             loggedIn = true;
             return navBean.redirectToAdmin();
         } else {
+            FacesContext fContext = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed", "No such user");
             fContext.addMessage(null, msg);
             return "fail";
@@ -82,6 +81,7 @@ public class SessionManager {
 
     public String logout() {
         loggedIn = false;
+        FacesContext fContext = FacesContext.getCurrentInstance();
         HttpSession httpSession = (HttpSession) fContext.getExternalContext().getSession(false);
         httpSession.invalidate();
         return navBean.redirectToLogin();
