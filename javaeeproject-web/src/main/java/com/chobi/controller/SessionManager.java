@@ -22,7 +22,7 @@ public class SessionManager implements Serializable {
     private String userName;
     private String password;
     private boolean loggedIn;
-    private boolean principal = true;
+    private boolean principal = false;
     private User user;
 
     public User getUser() {

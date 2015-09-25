@@ -25,8 +25,9 @@ public class CourseProducer {
                 Course.GRAPH_DEEP
         );
 
-        return all.stream().filter(c -> c.getTeacher().getUser().getId() == user.getId()).collect(Collectors.toList());
-
+        return all.stream()
+                  .filter(c -> c.getTeacher().getUser().getId() == user.getId())
+                  .collect(Collectors.toList());
     }
 
     public List<Course> getAllCourses() {
