@@ -22,7 +22,7 @@ public class BoundaryLogger {
            return ic.proceed();
         } finally {
             Long stop = System.currentTimeMillis() - start;
-            logger.log(Level.INFO, "task -- " + ic.getMethod().getName() + " took: " + stop + "ms");
+            logger.log(Level.INFO, "Transaction -- " + ic.getMethod().getName() + " took: " + stop + "ms");
         }
     }
 }
