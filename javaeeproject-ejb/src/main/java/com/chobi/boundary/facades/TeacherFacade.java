@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 @RequestScoped
-public class TeacherProducer {
+public class TeacherFacade {
 
     @EJB
     CRUDRepository repo;
@@ -35,5 +35,21 @@ public class TeacherProducer {
                 Teacher.FIND_ALL,
                 Teacher.GRAPH_DEEP
         );
+    }
+
+    public Teacher addTeacher(Teacher teacher) {
+        return null;
+    }
+
+    public Teacher editTeacher(Teacher teacher) {
+        return null;
+    }
+
+    public void deleteTeacher(Teacher teacher) {
+
+    }
+
+    public Teacher getOneTeacher(int id) {
+        return repo.find(Teacher.class, id);
     }
 }

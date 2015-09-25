@@ -1,6 +1,6 @@
 package com.chobi.controller;
 
-import com.chobi.boundary.facades.CourseProducer;
+import com.chobi.boundary.facades.CourseFacade;
 import com.chobi.business.entities.Course;
 
 import javax.faces.bean.ManagedBean;
@@ -16,7 +16,7 @@ import java.util.List;
 public class CourseManager {
 
     @Inject
-    private CourseProducer producer;
+    private CourseFacade producer;
     @Inject
     private SessionManager sm;
 

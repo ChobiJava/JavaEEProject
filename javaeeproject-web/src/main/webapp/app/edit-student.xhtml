@@ -5,7 +5,21 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+
 <f:view>
-    <h:outputLabel value="Hello, world"/>
+    <h:messages/>
+    <ui:include src="../resources/templates/header.xhtml" />
+    <ui:include src="../resources/templates/menu.xhtml" />
+    <f:metadata>
+        <f:viewParam name="id" value="#{editStudent.student}"
+                     converter="#{entityConverter}" converterMessage="Unknown product, please use a link from within the system."
+                     required="true" requiredMessage="Bad request, please use a link from within the system."
+                />
+    </f:metadata>
+    <h:form rendered="#{not empty editStudent.student}">
+    <h:inputText value="#{editStudent.student.firstName}" />
+    <h:inputTextarea value="#{editStudent.student.lastName}" />
+    <h:commandButton value="save" action="#{editStudent.save}" />
+</h:form>
 </f:view>
 </html>

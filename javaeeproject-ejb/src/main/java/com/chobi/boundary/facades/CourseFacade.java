@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * Created by Chobii on 24/09/15.
  */
 @RequestScoped
-public class CourseProducer {
+public class CourseFacade {
 
     @Inject
     private CRUDRepository crudRepository;
@@ -35,5 +35,21 @@ public class CourseProducer {
                 Course.class,
                 Course.FIND_ALL
         );
+    }
+
+    public Course addCourse(Course course) {
+        return null;
+    }
+
+    public Course editCourse(Course course) {
+        return null;
+    }
+
+    public void deleteCourse(Course course) {
+
+    }
+
+    public Course getOneCourse(int id) {
+        return crudRepository.find(Course.class, id);
     }
 }

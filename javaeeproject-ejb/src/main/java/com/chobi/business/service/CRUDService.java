@@ -2,7 +2,7 @@ package com.chobi.business.service;
 
 import com.chobi.boundary.logging.BoundaryLogger;
 
-import javax.ejb.Local;
+import javax.ejb.*;
 import javax.enterprise.context.RequestScoped;
 import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
@@ -19,6 +19,8 @@ import java.util.Set;
 @RequestScoped
 @Local(CRUDRepository.class)
 @Interceptors(BoundaryLogger.class)
+@TransactionManagement(TransactionManagementType.CONTAINER)
+@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 public class CRUDService implements CRUDRepository {
 
     private static final String HINT = "javax.persistence.fetchgraph";

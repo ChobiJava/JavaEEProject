@@ -11,8 +11,7 @@
 <h:outputStylesheet library="css" name="stylesheet.css" />
 <f:view>
     <div class="hej">
-        <h:form>
-    <ui:repeat value="#{students}" var="_student">
+    <ui:repeat value="#{viewStudents.students}" var="_student">
         <p:panelGrid columns="2" styleClass="studentPanel">
             <f:facet name="header">
                 <p:graphicImage url="http://img3.wikia.nocookie.net/__cb20130219042629/obsidianvalley/images/d/d6/Character_Placeholder.png" />
@@ -22,10 +21,12 @@
             <h:outputText value="#{_student.firstName} #{_student.lastName}"/>
 
             <h:outputText value="SSN:" />
-            <h:commandLink action="#{studentController.blaha(_student.id)}" value="#{_student.ssn}" />
+            <h:link value="EDIT" outcome="/app/edit-student.xhtml">
+                <f:param name="id" value="#{_student.id}" />
+            </h:link>
         </p:panelGrid>
     </ui:repeat>
-        </h:form>
+
     </div>
 </f:view>
 </body>
