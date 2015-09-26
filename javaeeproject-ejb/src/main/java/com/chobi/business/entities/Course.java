@@ -19,7 +19,8 @@ import java.util.List;
 @NamedEntityGraphs({
         @NamedEntityGraph(name = Course.GRAPH_DEEP,
         attributeNodes = {
-                @NamedAttributeNode("teacher")
+                @NamedAttributeNode("teacher"),
+                @NamedAttributeNode("students")
         },
         subgraphs = @NamedSubgraph(name = Teacher.GRAPH_DEEP,
         attributeNodes = @NamedAttributeNode("user")))

@@ -28,7 +28,7 @@ public class Student extends HumanEntity{
     public static final String FIND_ALL = "student.findAll";
 
     @ManyToMany(targetEntity = Course.class)
-    @JoinTable(name = "student_courses",
+    @JoinTable(name = "student_course",
             joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id")
     )

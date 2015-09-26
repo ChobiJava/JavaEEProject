@@ -13,6 +13,15 @@ import java.time.LocalDate;
 @Table(name = "attendance")
 public class Attendance extends SuperEntity{
 
+    public Attendance(Student student, Course course, boolean present) {
+        this.student = student;
+        this.course = course;
+        this.schoolDay = LocalDate.now();
+        this.present = present;
+    }
+
+    public Attendance() {}
+
     @OneToOne
     @JoinColumn(name = "student_id")
     private Student student;
