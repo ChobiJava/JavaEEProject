@@ -25,7 +25,7 @@
     <h:inputText value="#{editStudent.student.contactInfo.city}" />
     <h:inputText value="#{editStudent.student.contactInfo.email}" />
     <h:inputText value="#{editStudent.student.contactInfo.phone}" />
-    <p:fileUpload value="#{editStudent.file}" mode="simple" />
+    <p:fileUpload value="#{editStudent.file}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
     <p:commandButton value="save" action="#{editStudent.save}" ajax="false" />
 </h:form>
 </f:view>
