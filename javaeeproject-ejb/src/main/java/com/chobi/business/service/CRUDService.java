@@ -59,8 +59,15 @@ public class CRUDService implements CRUDRepository {
     }
 
     @Override
-    public <T> List<T> findByNamedQuery(Class<T> entityClass, String queryName, int resultLimit) {
-        return null;
+    public <T> List<T> findByNamedQuery(Class<T> entityClass, String queryName, String entityGraph, Map parameters) {
+        Query query = em.createNamedQuery(queryName, entityClass)
+                .setHint(HINT, em.getEntityGraph(entityGraph));
+        Set<Map.Entry> params = parameters.entrySet();
+        for (Map.Entry entry : params) {
+            query.setParameter(entry.getKey().toString(), entry.getValue());
+        }
+
+        return query.getResultList();
     }
 
     @Override

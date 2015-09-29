@@ -9,6 +9,16 @@ import java.time.LocalDate;
  * Created by Chobii on 15/09/15.
  */
 
+@NamedQueries({
+        @NamedQuery(name = Attendance.ATTENDANCE_FOR_COURSE_AND_DAY, query = "SELECT a from Attendance a where a.course like :course and a.schoolDay like :schoolday")
+})
+
+@NamedEntityGraphs({
+        @NamedEntityGraph(name = Attendance.GRAPH_DEEP, attributeNodes = {
+                @NamedAttributeNode("course")
+        })
+})
+
 @Entity
 @Table(name = "attendance")
 public class Attendance extends SuperEntity{
@@ -21,6 +31,9 @@ public class Attendance extends SuperEntity{
     }
 
     public Attendance() {}
+
+    public static final String ATTENDANCE_FOR_COURSE_AND_DAY = "attendance.FindAllForCourseAndDate";
+    public static final String GRAPH_DEEP = "attendance.WithCourse";
 
     @OneToOne
     @JoinColumn(name = "student_id")

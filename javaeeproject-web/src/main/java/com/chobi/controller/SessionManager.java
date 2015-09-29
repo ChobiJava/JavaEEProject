@@ -36,7 +36,8 @@ public class SessionManager implements Serializable {
         if ((user = uRep.findUser(userName, password)) != null) {
             loggedIn = true;
             checkifprincipal();
-            return navBean.redirectToAdmin();
+            System.out.println(user.getUserName());
+            return "/app/admin.xhtml";
         } else {
             FacesContext fContext = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed", "No such user");

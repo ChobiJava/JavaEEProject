@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 @NamedQueries({
-        @NamedQuery(name = Course.FIND_ALL, query = "select c from Course c")
+        @NamedQuery(name = Course.FIND_ALL, query = "select distinct c from Course c")
 })
 @NamedEntityGraphs({
         @NamedEntityGraph(name = Course.GRAPH_DEEP,
@@ -30,6 +30,7 @@ import java.util.List;
 @Table(name = "course")
 public class Course extends SuperEntity{
 
+    public static final String FIND_ONE = "course.FindOne";
     public static final String FIND_ALL = "course.FindAll";
     public static final String GRAPH_DEEP = "course.Deep";
 
@@ -98,5 +99,48 @@ public class Course extends SuperEntity{
 
     public void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseName='" + courseName + '\'' +
+                ", points=" + points +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", teacher=" + teacher +
+                ", students=" + students +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Course course = (Course) o;
+
+        if (getPoints() != course.getPoints()) return false;
+        if (getCourseName() != null ? !getCourseName().equals(course.getCourseName()) : course.getCourseName() != null)
+            return false;
+        if (getStartDate() != null ? !getStartDate().equals(course.getStartDate()) : course.getStartDate() != null)
+            return false;
+        if (getEndDate() != null ? !getEndDate().equals(course.getEndDate()) : course.getEndDate() != null)
+            return false;
+        if (getTeacher() != null ? !getTeacher().equals(course.getTeacher()) : course.getTeacher() != null)
+            return false;
+        return !(getStudents() != null ? !getStudents().equals(course.getStudents()) : course.getStudents() != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getCourseName() != null ? getCourseName().hashCode() : 0;
+        result = 31 * result + getPoints();
+        result = 31 * result + (getStartDate() != null ? getStartDate().hashCode() : 0);
+        result = 31 * result + (getEndDate() != null ? getEndDate().hashCode() : 0);
+        result = 31 * result + (getTeacher() != null ? getTeacher().hashCode() : 0);
+        result = 31 * result + (getStudents() != null ? getStudents().hashCode() : 0);
+        return result;
     }
 }

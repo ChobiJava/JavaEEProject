@@ -13,7 +13,7 @@ public interface CRUDRepository {
     <T> T update(T t);
     <T> void delete(Class<T> entityClass, int id);
     <T> List<T> findByNamedQuery(Class<T> entityClass, String queryName);
-    <T> List<T> findByNamedQuery(Class<T> entityClass, String queryName, int resultLimit);
+    <T> List<T> findByNamedQuery(Class<T> entityClass, String queryName, String entityGraph, Map parameters);
     <T> List<T> findByNamedQuery(Class<T> entityClass, String queryName, String entityGraph);
     <T> List<T> findByNamedQuery(Class<T> entityClass, String queryName, Map parameters);
 }

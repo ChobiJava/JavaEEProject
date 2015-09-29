@@ -11,25 +11,32 @@
     <ui:include src="../resources/templates/menu.xhtml" />
 
 
-        <h:outputText value="" />
     <h:form>
-    <p:dataTable id="howdy"  var="student" value="#{courseManager.ACourse.students}" selection="#{courseManager.students}" rowKey="#{student.id}" style="margin-bottom:0">
+        <p:growl id="bajs" />
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Basic:" />
+            <p:selectOneMenu value="#{attendanceManager.attendanceCourse}" converter="omnifaces.SelectItemsConverter" >
+                <f:selectItem itemLabel="Select One" />
+                <f:selectItems var="course" value="#{attendanceManager.myCourses}" itemLabel="#{course.courseName}" itemValue="#{course}" />
+                <p:ajax event="valueChange" process="@form" immediate="true" partialSubmit="true" update=":studentList" />
+            </p:selectOneMenu>
+        </h:panelGrid>
+    </h:form>
+    <h:form id="studentList" >
+    <p:dataTable id="howdy" var="student" rendered="#{attendanceManager.attendanceCourse == null ? false : true}" value="#{attendanceManager.attendanceCourse.students}" selection="#{attendanceManager.studentsPresent}" rowKey="#{student.id}" style="margin-bottom:0">
         <f:facet name="header">
-            Checkbox
+            Attendance for #{attendanceManager.attendanceCourse.courseName}
         </f:facet>
         <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
-        <p:column headerText="Id">
-            <h:outputText value="#{student.id}" />
+        <p:column headerText="Name">
+            <h:outputText value="#{student.firstName} #{student.lastName}" />
         </p:column>
-        <p:column headerText="First Name">
-            <h:outputText value="#{student.firstName}" />
+        <p:column headerText="Picture">
+            <p:graphicImage url="http://img3.wikia.nocookie.net/__cb20130219042629/obsidianvalley/images/d/d6/Character_Placeholder.png" />
         </p:column>
-        <p:column headerText="Last Name">
-            <h:outputText value="#{student.lastName}" />
-        </p:column>
+
         <f:facet name="footer">
-            <p:commandButton action="#{courseManager.handleStudents}" value="View" >
-                <f:param name="class" value="#{courseManager.ACourse.id}" />
+            <p:commandButton action="#{attendanceManager.saveAttendance}" value="Submit" >
             </p:commandButton>
         </f:facet>
     </p:dataTable>
