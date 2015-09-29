@@ -14,7 +14,10 @@
     <ui:repeat value="#{viewStudents.students}" var="_student">
         <p:panelGrid columns="2" styleClass="studentPanel">
             <f:facet name="header">
-                <p:graphicImage url="http://img3.wikia.nocookie.net/__cb20130219042629/obsidianvalley/images/d/d6/Character_Placeholder.png" />
+                <p:graphicImage rendered="#{_student.photo == null ? false : true}" value="#{viewStudents.image}">
+                    <f:param name="student_id" value="#{_student.id}" />
+                </p:graphicImage>
+                <p:graphicImage rendered="#{_student.photo == null ? true : false}" url="http://img3.wikia.nocookie.net/__cb20130219042629/obsidianvalley/images/d/d6/Character_Placeholder.png" />
             </f:facet>
 
             <h:outputText value="Name:" />

@@ -27,12 +27,22 @@ public class Student extends HumanEntity{
 
     public static final String FIND_ALL = "student.findAll";
 
-    @ManyToMany(targetEntity = Course.class)
+    @ManyToMany(targetEntity = Course.class, cascade = CascadeType.ALL)
     @JoinTable(name = "student_course",
             joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id")
     )
     private List<Course> courses;
+
+    private byte[] photo;
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
 
     public List<Course> getCourses() {
         return courses;

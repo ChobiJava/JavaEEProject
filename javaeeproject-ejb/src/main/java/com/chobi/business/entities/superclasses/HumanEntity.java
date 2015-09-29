@@ -2,6 +2,7 @@ package com.chobi.business.entities.superclasses;
 
 import com.chobi.business.entities.ContactInfo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
@@ -22,7 +23,7 @@ public abstract class HumanEntity extends SuperEntity {
     @NotNull
     @Digits(fraction = 0, integer = 12)
     private String ssn;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_id")
     private ContactInfo contactInfo;
 

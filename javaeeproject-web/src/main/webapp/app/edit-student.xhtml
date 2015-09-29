@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
 
 <f:view>
     <h:messages/>
@@ -16,10 +17,16 @@
                      required="true" requiredMessage="Bad request, please use a link from within the system."
                 />
     </f:metadata>
-    <h:form rendered="#{not empty editStudent.student}">
+    <h:form rendered="#{not empty editStudent.student}" enctype="multipart/form-data">
     <h:inputText value="#{editStudent.student.firstName}" />
-    <h:inputTextarea value="#{editStudent.student.lastName}" />
-    <h:commandButton value="save" action="#{editStudent.save}" />
+    <h:inputText value="#{editStudent.student.lastName}" />
+    <h:inputText value="#{editStudent.student.contactInfo.adress}" />
+    <h:inputText value="#{editStudent.student.contactInfo.zip}" />
+    <h:inputText value="#{editStudent.student.contactInfo.city}" />
+    <h:inputText value="#{editStudent.student.contactInfo.email}" />
+    <h:inputText value="#{editStudent.student.contactInfo.phone}" />
+    <p:fileUpload value="#{editStudent.file}" mode="simple" />
+    <p:commandButton value="save" action="#{editStudent.save}" ajax="false" />
 </h:form>
 </f:view>
 </html>
