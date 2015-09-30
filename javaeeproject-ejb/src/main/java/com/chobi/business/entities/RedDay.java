@@ -3,6 +3,8 @@ package com.chobi.business.entities;
 import com.chobi.business.entities.superclasses.SuperEntity;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
 
@@ -11,10 +13,13 @@ import java.time.LocalDate;
  */
 
 @Entity
-@Table(name = "red_day")
+@Table(name = "redday")
 public class RedDay extends SuperEntity{
 
     private LocalDate redDay;
+    @OneToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
 
     public LocalDate getRedDay() {
         return redDay;
@@ -22,5 +27,13 @@ public class RedDay extends SuperEntity{
 
     public void setRedDay(LocalDate redDay) {
         this.redDay = redDay;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }

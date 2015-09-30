@@ -4,7 +4,7 @@ import com.chobi.business.entities.Attendance;
 import com.chobi.business.entities.Course;
 import com.chobi.business.entities.Student;
 import com.chobi.business.entities.User;
-import com.chobi.business.service.CRUDRepository;
+import com.chobi.business.service.CRUDService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -19,10 +19,10 @@ import java.util.stream.Collectors;
 public class CourseFacade {
 
     @Inject
-    private CRUDRepository crudRepository;
+    private CRUDService crudService;
 
     public List<Course> getMyCourses(User user) {
-        List<Course> all = crudRepository.findByNamedQuery(
+        List<Course> all = crudService.findByNamedQuery(
                 Course.class,
                 Course.FIND_ALL,
                 Course.GRAPH_DEEP
@@ -35,7 +35,7 @@ public class CourseFacade {
     }
 
     public List<Course> getAllCourses() {
-        return crudRepository.findByNamedQuery(
+        return crudService.findByNamedQuery(
                 Course.class,
                 Course.FIND_ALL,
                 Course.GRAPH_DEEP
@@ -55,7 +55,7 @@ public class CourseFacade {
     }
 
     public Course getOneCourse(int id) {
-        return crudRepository.find(Course.class, id);
+        return crudService.find(Course.class, id);
     }
 
     public void saveAttendance(List<Student> students, Course course) {
@@ -73,6 +73,6 @@ public class CourseFacade {
             }
 
         }
-        attendanceForClass.forEach(crudRepository::create);
+        attendanceForClass.forEach(crudService::create);
     }
 }

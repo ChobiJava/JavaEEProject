@@ -1,7 +1,7 @@
 package com.chobi.boundary.facades;
 
 import com.chobi.business.entities.Student;
-import com.chobi.business.service.CRUDRepository;
+import com.chobi.business.service.CRUDService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -15,10 +15,10 @@ import java.util.List;
 public class StudentFacade {
 
     @Inject
-    CRUDRepository service;
+    CRUDService crudService;
 
     public List<Student> retrieveAllStudents() {
-         return service.findByNamedQuery(
+         return crudService.findByNamedQuery(
                 Student.class,
                 Student.FIND_ALL,
                 "student.withContactInfo"
@@ -26,7 +26,7 @@ public class StudentFacade {
     }
 
     public Student getOneStudent(int id) {
-        return service.find(Student.class, id);
+        return crudService.find(Student.class, id);
     }
 
     public Student addStudent(Student student) {
@@ -34,7 +34,7 @@ public class StudentFacade {
     }
 
     public void editStudent(Student student) {
-        service.update(student);
+        crudService.update(student);
     }
 
     public void deleteStudent(Student student) {

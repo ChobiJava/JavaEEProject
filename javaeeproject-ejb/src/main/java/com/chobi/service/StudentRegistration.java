@@ -1,7 +1,7 @@
 package com.chobi.service;
 
 import com.chobi.business.entities.Student;
-import com.chobi.business.service.CRUDRepository;
+import com.chobi.business.service.CRUDService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Event;
@@ -15,14 +15,14 @@ import javax.inject.Inject;
 public class StudentRegistration {
 
     @Inject
-    private CRUDRepository crudRepository;
+    private CRUDService crudService;
 
     @Inject
     private Event<Student> studentEvent;
 
     public void register(Student student) {
         try {
-            crudRepository.create(student);
+            crudService.create(student);
             studentEvent.fire(student);
         } catch (Exception e) {
             e.printStackTrace();

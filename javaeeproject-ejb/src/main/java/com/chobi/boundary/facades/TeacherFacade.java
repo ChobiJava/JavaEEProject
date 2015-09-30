@@ -1,12 +1,12 @@
 package com.chobi.boundary.facades;
 
-import com.chobi.business.service.CRUDRepository;
 import com.chobi.business.entities.Teacher;
+import com.chobi.business.service.CRUDService;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.ejb.Stateless;
 import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
 
@@ -14,11 +14,11 @@ import java.util.List;
  * Created by Chobii on 16/09/15.
  */
 
-@RequestScoped
+@Stateless
 public class TeacherFacade {
 
-    @EJB
-    CRUDRepository repo;
+    @Inject
+    CRUDService crudService;
 
     private List<Teacher> teachers;
 
@@ -30,7 +30,7 @@ public class TeacherFacade {
 
     @PostConstruct
     public void retrieveAllTeachers() {
-        teachers = repo.findByNamedQuery(
+        teachers = crudService.findByNamedQuery(
                 Teacher.class,
                 Teacher.FIND_ALL,
                 Teacher.GRAPH_DEEP
@@ -50,6 +50,6 @@ public class TeacherFacade {
     }
 
     public Teacher getOneTeacher(int id) {
-        return repo.find(Teacher.class, id);
+        return crudService.find(Teacher.class, id);
     }
 }

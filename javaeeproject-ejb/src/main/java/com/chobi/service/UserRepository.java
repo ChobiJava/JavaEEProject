@@ -1,7 +1,7 @@
 package com.chobi.service;
 
 import com.chobi.business.entities.User;
-import com.chobi.business.service.CRUDRepository;
+import com.chobi.business.service.CRUDService;
 import com.chobi.business.util.QueryParams;
 
 import javax.enterprise.context.RequestScoped;
@@ -16,11 +16,11 @@ import java.io.Serializable;
 public class UserRepository implements Serializable {
 
     @Inject
-    private CRUDRepository crudRepository;
+    private CRUDService crudService;
 
     public User findUser(String userName, String password) {
         try {
-            return crudRepository.findByNamedQuery(
+            return crudService.findByNamedQuery(
                     User.class,
                     User.FIND_BY_USERNAME_AND_PASSWORD,
                     QueryParams.with("userName", userName)

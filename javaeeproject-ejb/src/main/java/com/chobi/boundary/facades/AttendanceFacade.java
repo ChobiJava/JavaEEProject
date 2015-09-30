@@ -3,7 +3,7 @@ package com.chobi.boundary.facades;
 import com.chobi.business.entities.Attendance;
 import com.chobi.business.entities.Course;
 import com.chobi.business.entities.Student;
-import com.chobi.business.service.CRUDRepository;
+import com.chobi.business.service.CRUDService;
 import com.chobi.business.util.QueryParams;
 
 import javax.ejb.Stateless;
@@ -20,10 +20,10 @@ import java.util.List;
 public class AttendanceFacade {
 
     @Inject
-    CRUDRepository crudRepository;
+    CRUDService crudService;
 
     public List<Attendance> attendanceForCourseAndDay(Course course, LocalDate schoolDay) {
-        return crudRepository.findByNamedQuery(
+        return crudService.findByNamedQuery(
                 Attendance.class,
                 Attendance.ATTENDANCE_FOR_COURSE_AND_DAY,
                 Attendance.GRAPH_DEEP,
@@ -47,6 +47,6 @@ public class AttendanceFacade {
             }
 
         }
-        attendanceForClass.forEach(crudRepository::create);
+        attendanceForClass.forEach(crudService::create);
     }
 }
