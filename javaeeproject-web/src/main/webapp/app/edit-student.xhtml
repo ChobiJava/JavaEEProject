@@ -28,5 +28,8 @@
     <p:fileUpload value="#{editStudent.file}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
     <p:commandButton value="save" action="#{editStudent.save}" ajax="false" />
 </h:form>
+    <h:form>
+        <h:commandButton value="Remove this Student" action="#{editStudent.removeStudent}" />
+    </h:form>
 </f:view>
 </html>

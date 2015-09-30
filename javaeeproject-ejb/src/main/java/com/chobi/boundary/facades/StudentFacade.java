@@ -2,6 +2,7 @@ package com.chobi.boundary.facades;
 
 import com.chobi.business.entities.Student;
 import com.chobi.business.service.CRUDService;
+import com.chobi.business.util.QueryParams;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -26,11 +27,17 @@ public class StudentFacade {
     }
 
     public Student getOneStudent(int id) {
-        return crudService.find(Student.class, id);
+        return crudService.findByNamedQuery(
+                Student.class,
+                Student.FIND_ONE,
+                Student.GRAPH_DEEP,
+                QueryParams.with("id", id)
+                .parameters()
+        ).get(0);
     }
 
     public Student addStudent(Student student) {
-        return null;
+        return crudService.create(student);
     }
 
     public void editStudent(Student student) {
@@ -38,6 +45,9 @@ public class StudentFacade {
     }
 
     public void deleteStudent(Student student) {
+        student.getCourses().clear();
+        editStudent(student);
 
+        crudService.delete(Student.class, student.getId());
     }
 }

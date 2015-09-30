@@ -48,8 +48,10 @@ public class Course extends SuperEntity{
     @ManyToOne
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
-    @ManyToMany(targetEntity = Student.class,
-            mappedBy = "courses"
+    @ManyToMany(targetEntity = Student.class)
+    @JoinTable(name = "student_course",
+            joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id")
     )
     private List<Student> students;
 
