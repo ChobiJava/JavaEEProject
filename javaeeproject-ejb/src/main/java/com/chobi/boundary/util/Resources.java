@@ -1,4 +1,4 @@
-package com.chobi.util;
+package com.chobi.boundary.util;
 
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;

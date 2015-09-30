@@ -2,7 +2,7 @@ package com.chobi.service;
 
 import com.chobi.business.entities.User;
 import com.chobi.business.service.CRUDRepository;
-import com.chobi.business.service.QueryParams;
+import com.chobi.business.util.QueryParams;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;

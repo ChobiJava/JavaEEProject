@@ -4,7 +4,7 @@ import com.chobi.business.entities.Attendance;
 import com.chobi.business.entities.Course;
 import com.chobi.business.entities.Student;
 import com.chobi.business.service.CRUDRepository;
-import com.chobi.business.service.QueryParams;
+import com.chobi.business.util.QueryParams;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;

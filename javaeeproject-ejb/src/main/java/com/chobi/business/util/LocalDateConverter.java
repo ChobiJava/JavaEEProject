@@ -1,4 +1,4 @@
-package com.chobi.util;
+package com.chobi.business.util;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
