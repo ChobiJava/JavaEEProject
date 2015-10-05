@@ -5,6 +5,11 @@ import com.chobi.boundary.facades.CourseFacade;
 import com.chobi.business.entities.Course;
 import com.chobi.business.entities.Student;
 import com.chobi.business.entities.User;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.model.DefaultScheduleEvent;
+import org.primefaces.model.DefaultScheduleModel;
+import org.primefaces.model.ScheduleEvent;
+import org.primefaces.model.ScheduleModel;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -12,6 +17,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,6 +35,16 @@ public class AttendanceManager {
     private List<Course> myCourses;
     private Course attendanceCourse;
     private List<Student> studentsPresent;
+    private ScheduleModel schedule;
+    private ScheduleEvent event;
+
+    public ScheduleModel getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(ScheduleModel schedule) {
+        this.schedule = schedule;
+    }
 
     public void saveAttendance() {
         aFacade.saveAttendance(studentsPresent, attendanceCourse);
@@ -60,10 +76,22 @@ public class AttendanceManager {
 
     private User user;
 
+    public void selectDay(SelectEvent event) {
+        System.out.println("hej");
+        this.event = new DefaultScheduleEvent("", (Date) event.getObject(), (Date) event.getObject(), "red");
+        schedule.addEvent(this.event);
+
+    }
+
+    public void deSelectDay(SelectEvent event) {
+        schedule.deleteEvent((ScheduleEvent) event.getObject());
+    }
+
     @PostConstruct
     private void init() {
         retrieveUserForSession();
         myCourses = cFacade.getMyCourses(user);
+        schedule = new DefaultScheduleModel();
     }
 
     private void retrieveUserForSession() {

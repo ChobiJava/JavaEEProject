@@ -264,3 +264,19 @@ input {
 
 }
 
+.red {
+    height: 100% !important;
+    background: transparent !important;
+
+}
+
+.fc-time {
+    display: none;
+}
+
+.fc-event-container {
+    height: 200px;
+    background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Red_Cross.svg/1000px-Red_Cross.svg.png") center no-repeat !important;
+    background-size: contain !important;
+}
+

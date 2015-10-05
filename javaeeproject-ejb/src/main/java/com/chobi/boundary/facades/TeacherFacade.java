@@ -3,11 +3,8 @@ package com.chobi.boundary.facades;
 import com.chobi.business.entities.Teacher;
 import com.chobi.business.service.CRUDService;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
-import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.List;
 
 /**
@@ -20,17 +17,9 @@ public class TeacherFacade {
     @Inject
     CRUDService crudService;
 
-    private List<Teacher> teachers;
 
-    @Produces
-    @Named
-    public List<Teacher> getTeachers() {
-        return teachers;
-    }
-
-    @PostConstruct
-    public void retrieveAllTeachers() {
-        teachers = crudService.findByNamedQuery(
+    public List<Teacher> retrieveAllTeachers() {
+         return crudService.findByNamedQuery(
                 Teacher.class,
                 Teacher.FIND_ALL,
                 Teacher.GRAPH_DEEP

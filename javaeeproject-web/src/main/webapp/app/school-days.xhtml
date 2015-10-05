@@ -8,25 +8,15 @@
         xmlns:p="http://primefaces.org/ui"
         xmlns:fn="http://java.sun.com/jstl/functions">
 <ui:include src="../resources/templates/header.xhtml" />
-<body>
-<script type="text/javascript">
-
-    var disabledDays = ["09-25-2015"];
-    function disableAllTheseDays(date) {
-        var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
-        for (i = 0; i &lt; disabledDays.length; i++) {
-            if($.inArray((m+1) + '-' + d + '-' + y,disabledDays) != -1) {
-                return [false];
-            }
-        }
-        return [true];
-    }
-
-</script>
+<ui:include src="../resources/templates/menu.xhtml" />
+<h:body>
 <f:view>
-
-    <ui:include src="../resources/templates/menu.xhtml" />
-    <p:calendar value="#{redDayCalender.date}" mode="inline" pattern="MM-dd-yyyy" beforeShowDay="disableAllTheseDays"/>
+    <h:form>
+        <p:schedule id="schedule" timeZone="GMT+1" value="#{attendanceManager.schedule}" aspectRatio="2.0">
+            <p:ajax event="dateSelect" listener="#{attendanceManager.selectDay}" update="schedule"  />
+            <p:ajax event="eventSelect" listener="#{attendanceManager.deSelectDay}" update="schedule" />
+        </p:schedule>
+    </h:form>
 </f:view>
-</body>
+</h:body>
 </html>

@@ -6,6 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 
@@ -73,6 +75,14 @@ public class Course extends SuperEntity{
 
     public Teacher getTeacher() {
         return teacher;
+    }
+
+    public void setStartDate(Date date) {
+        this.startDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+    public void setEndDate(Date date) {
+        this.endDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
     public void setTeacher(Teacher teacher) {

@@ -43,7 +43,7 @@ public class CourseFacade {
     }
 
     public Course addCourse(Course course) {
-        return null;
+        return crudService.create(course);
     }
 
     public Course editCourse(Course course) {
