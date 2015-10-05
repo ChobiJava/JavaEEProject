@@ -27,7 +27,7 @@ public class AttendanceFacade {
                 Attendance.class,
                 Attendance.ATTENDANCE_FOR_COURSE_AND_DAY,
                 Attendance.GRAPH_DEEP,
-                QueryParams.with("course", course)
+                QueryParams.with("course", course.getCourseName())
                            .and("schoolday", schoolDay)
                            .parameters());
     }

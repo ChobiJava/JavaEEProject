@@ -10,7 +10,7 @@ import java.time.LocalDate;
  */
 
 @NamedQueries({
-        @NamedQuery(name = Attendance.ATTENDANCE_FOR_COURSE_AND_DAY, query = "SELECT a from Attendance a where a.course like :course and a.schoolDay like :schoolday")
+        @NamedQuery(name = Attendance.ATTENDANCE_FOR_COURSE_AND_DAY, query = "SELECT a from Attendance a where a.course.courseName like :course and a.schoolDay like :schoolday")
 })
 
 @NamedEntityGraphs({
