@@ -10,7 +10,9 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Chobii on 26/09/15.
@@ -48,5 +50,31 @@ public class AttendanceFacade {
 
         }
         attendanceForClass.forEach(crudService::create);
+    }
+
+    public Map<String, Integer> retreiveStatisticsForCourse(Course course, int month) {
+        int present = 0;
+        int absent = 0;
+        Map<String, Integer> stats = new HashMap<>();
+        List<Attendance> attendanceForMonth = crudService.findByNamedQuery(
+                Attendance.class,
+                Attendance.ATTENDANCE_FOR_COURSE_AND_MONTH,
+                Attendance.GRAPH_DEEP,
+                QueryParams
+                        .with("course", course.getCourseName())
+                        .and("schoolday", month)
+                        .parameters());
+
+        for (Attendance a : attendanceForMonth) {
+            if (a.isPresent()) {
+                present++;
+            } else {
+                absent++;
+            }
+        }
+        stats.put("present", present);
+        stats.put("absent", absent);
+
+        return stats;
     }
 }

@@ -280,3 +280,7 @@ input {
     background-size: contain !important;
 }
 
+.attMenu {
+    width: 150px;
+}
+
