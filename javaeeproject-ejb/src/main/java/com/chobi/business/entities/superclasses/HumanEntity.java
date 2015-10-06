@@ -58,4 +58,25 @@ public abstract class HumanEntity extends SuperEntity {
     public void setContactInfo(ContactInfo contactInfo) {
         this.contactInfo = contactInfo;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        HumanEntity that = (HumanEntity) o;
+
+        if (!getFirstName().equals(that.getFirstName())) return false;
+        if (!getLastName().equals(that.getLastName())) return false;
+        return getSsn().equals(that.getSsn());
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getFirstName().hashCode();
+        result = 31 * result + getLastName().hashCode();
+        result = 31 * result + getSsn().hashCode();
+        return result;
+    }
 }

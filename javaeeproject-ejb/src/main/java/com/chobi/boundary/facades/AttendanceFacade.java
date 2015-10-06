@@ -52,7 +52,7 @@ public class AttendanceFacade {
         attendanceForClass.forEach(crudService::create);
     }
 
-    public Map<String, Integer> retreiveStatisticsForCourse(Course course, int month) {
+    public Map<String, Integer> retrieveStatisticsForCourse(Course course, int month) {
         int present = 0;
         int absent = 0;
         Map<String, Integer> stats = new HashMap<>();
@@ -63,15 +63,43 @@ public class AttendanceFacade {
                 QueryParams
                         .with("course", course.getCourseName())
                         .and("schoolday", month)
-                        .parameters());
+                        .parameters()
+        );
 
         for (Attendance a : attendanceForMonth) {
             if (a.isPresent()) {
                 present++;
-            } else {
-                absent++;
-            }
+            } else absent++;
         }
+        stats.put("present", present);
+        stats.put("absent", absent);
+
+        return stats;
+    }
+
+    public Map<String, Integer> retrieveStatisticsForStudent(Student student, int month) {
+        int present = 0;
+        int absent = 0;
+        Map<String, Integer> stats = new HashMap<>();
+        List<Attendance> attendanceForMonth = crudService.findByNamedQuery(
+                Attendance.class,
+                Attendance.ATTENDANCE_FOR_STUDENT_AND_MONTH,
+                Attendance.GRAPH_DEEP,
+                QueryParams
+                        .with("student", student.getId())
+                        .and("schoolday", month)
+                        .parameters()
+        );
+
+        System.out.println(attendanceForMonth.isEmpty());
+
+        for (Attendance a : attendanceForMonth) {
+            if (a.isPresent()) {
+                present++;
+            } else absent++;
+        }
+
+        System.out.println(present + " + " + absent);
         stats.put("present", present);
         stats.put("absent", absent);
 

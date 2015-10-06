@@ -12,20 +12,43 @@
 <ui:include src="/resources/templates/menu.xhtml" />
 <h:body>
 <f:view>
+    <div id="flex">
+    <p:panelGrid styleClass="flexC" columns="1">
     <h:form>
+        <p:growl sticky="false" showDetail="true" life="2000"/>
         <p:panelGrid columns="1" style="margin: 15px auto; text-align: center;" >
         <p:selectOneMenu styleClass="attMenu" value="#{statisticsManager.course}" converter="omnifaces.SelectItemsConverter" style="width: 200px;">
             <f:selectItem itemLabel="Select Course" />
             <f:selectItems value="#{statisticsManager.myCourses}" var="c" itemLabel="#{c.courseName}" itemValue="#{c}" />
         </p:selectOneMenu>
-        <p:selectOneMenu styleClass="attMenu" value="#{statisticsManager.month}" style="width: 200px; text-align: center;" >
+        <p:selectOneMenu styleClass="attMenu" value="#{statisticsManager.courseMonth}" style="width: 200px; text-align: center;" >
             <f:selectItem itemLabel="Select Month" />
             <f:selectItems value="#{statisticsManager.monthList}" />
         </p:selectOneMenu>
-        <p:commandButton action="#{statisticsManager.populateChart()}" value="Show" update=":pie" ajax="false"  />
+        <p:commandButton action="#{statisticsManager.populateChart()}" value="Show" update=":pie" ajax="false"/>
         </p:panelGrid>
     </h:form>
-    <p:chart id="pie" type="pie" model="#{statisticsManager.chart}" rendered="#{statisticsManager.course == null ? false : true}" style="width: 400px; height: 300px; margin: 0 auto;"/>
+        <p:chart id="pie" type="pie" model="#{statisticsManager.chart}" rendered="#{statisticsManager.course == null ? false : true ||statisticsManager.courseMonth == 0 ? false : true}" style="width: 400px; height: 300px; margin: 0 auto;"/>
+    </p:panelGrid>
+
+    <p:panelGrid styleClass="flexC" columns="1">
+        <h:form>
+            <p:growl sticky="false" showDetail="true" life="2000"/>
+            <p:panelGrid columns="1" style="margin: 15px auto; text-align: center;" >
+                <p:selectOneMenu styleClass="attMenu" value="#{statisticsManager.student}" converter="omnifaces.SelectItemsConverter" style="width: 200px;">
+                    <f:selectItem itemLabel="Select Student" />
+                    <f:selectItems value="#{statisticsManager.myStudents}" var="s" itemLabel="#{s.firstName} #{s.lastName}" itemValue="#{s}" />
+                </p:selectOneMenu>
+                <p:selectOneMenu styleClass="attMenu" value="#{statisticsManager.studentMonth}" style="width: 200px; text-align: center;" >
+                    <f:selectItem itemLabel="Select Month" />
+                    <f:selectItems value="#{statisticsManager.monthList}" />
+                </p:selectOneMenu>
+                <p:commandButton action="#{statisticsManager.populateChart2()}" value="Show" update=":pie2" ajax="false"/>
+            </p:panelGrid>
+        </h:form>
+            <p:chart id="pie2" type="pie" model="#{statisticsManager.chart2}" rendered="#{statisticsManager.student == null ? false : true ||statisticsManager.studentMonth == 0 ? false : true}" style="width: 400px; height: 300px; margin: 0 auto;"/>
+    </p:panelGrid>
+    </div>
 </f:view>
 </h:body>
 </html>

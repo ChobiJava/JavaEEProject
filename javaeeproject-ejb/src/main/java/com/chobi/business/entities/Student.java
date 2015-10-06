@@ -11,7 +11,7 @@ import java.util.List;
 
 @NamedQueries({
         @NamedQuery(name = Student.FIND_ALL,
-                    query = "SELECT s from Student s"),
+                    query = "SELECT distinct s from Student s"),
         @NamedQuery(name = Student.FIND_ONE,
         query = "select distinct s from Student s where s.id like :id")
 })
@@ -23,9 +23,14 @@ import java.util.List;
                           }),
         @NamedEntityGraph(name = Student.GRAPH_DEEP,
                           attributeNodes = {
-                                  @NamedAttributeNode("contactInfo"),
-                                  @NamedAttributeNode("courses")
-                          })
+                                  @NamedAttributeNode("contactInfo")
+                          }),
+        @NamedEntityGraph(name = Student.GRAPH_WITH_TEACHER,
+                          attributeNodes =
+                                  @NamedAttributeNode("courses"),
+                                        subgraphs = @NamedSubgraph(
+                                                name = Course.GRAPH_DEEP,
+                                                attributeNodes = @NamedAttributeNode("teacher")))
 })
 
 @Entity
@@ -35,6 +40,7 @@ public class Student extends HumanEntity{
     public static final String FIND_ALL = "student.findAll";
     public static final String FIND_ONE = "student.findOne";
     public static final String GRAPH_DEEP = "student.WithEverything";
+    public static final String GRAPH_WITH_TEACHER = "student.findTeacher";
 
     @ManyToMany(targetEntity = Course.class)
     @JoinTable(name = "student_course",
@@ -60,4 +66,6 @@ public class Student extends HumanEntity{
     public void setCourses(List<Course> courses) {
         this.courses = courses;
     }
+
+
 }

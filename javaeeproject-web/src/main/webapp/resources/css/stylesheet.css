@@ -284,3 +284,12 @@ input {
     width: 150px;
 }
 
+#flex {
+    display: flex;
+    justify-content: center;
+}
+
+.flexC {
+    margin: 50px;
+}
+

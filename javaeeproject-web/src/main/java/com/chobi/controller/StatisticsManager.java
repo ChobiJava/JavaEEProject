@@ -2,11 +2,14 @@ package com.chobi.controller;
 
 import com.chobi.boundary.facades.AttendanceFacade;
 import com.chobi.boundary.facades.CourseFacade;
+import com.chobi.boundary.facades.StudentFacade;
 import com.chobi.business.entities.Course;
+import com.chobi.business.entities.Student;
 import com.chobi.business.entities.User;
 import org.primefaces.model.chart.PieChartModel;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -15,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Chobii on 05/10/15.
@@ -27,20 +31,28 @@ public class StatisticsManager {
     private AttendanceFacade aFacade;
     @Inject
     private CourseFacade cFacade;
+    @Inject
+    private StudentFacade sFacade;
     private User user;
+    private Student student;
+    private Set<Student> myStudents;
     private List<Course> myCourses;
     private List<Integer> monthList;
-    private int month;
+    private int courseMonth;
+    private int studentMonth;
     private Course course;
     private Map<String, Integer> map;
+    private Map<String, Integer> map2;
 
     private PieChartModel chart;
+    private PieChartModel chart2;
 
     @PostConstruct
     private void init() {
         retrieveUserForSession();
         myCourses = cFacade.getMyCourses(user);
         monthList = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+        myStudents = sFacade.retrieveMyStudents(user);
 
     }
 
@@ -75,13 +87,37 @@ public class StatisticsManager {
     }
 
     public void populateChart() {
-        System.out.println(course.getCourseName());
-        chart = new PieChartModel();
-        map = aFacade.retreiveStatisticsForCourse(course, month);
-        chart.set("Present", map.get("present"));
-        chart.set("Absent", map.get("absent"));
-        chart.setTitle("Attendance");
-        chart.setLegendPosition("w");
+        if (course == null) {
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Please select a Course and try again");
+            facesContext.addMessage(null, msg);
+        }
+        if (course != null && courseMonth == 0) {
+            System.out.println(courseMonth);
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Please select a Month and try again");
+            facesContext.addMessage(null, msg);
+        }
+        else {
+            System.out.println("im here?");
+            chart = new PieChartModel();
+            map = aFacade.retrieveStatisticsForCourse(course, courseMonth);
+
+            chart.set("Present", map.get("present"));
+            chart.set("Absent", map.get("absent"));
+            chart.setTitle("Attendance");
+            chart.setLegendPosition("w");
+        }
+    }
+
+    public void populateChart2() {
+        chart2 = new PieChartModel();
+        map2 = aFacade.retrieveStatisticsForStudent(student, studentMonth);
+        System.out.println(map2.get("present"));
+        chart2.set("Present", map2.get("present"));
+        chart2.set("Absent", map2.get("absent"));
+        chart2.setTitle("Attendance");
+        chart2.setLegendPosition("w");
     }
 
     public List<Integer> getMonthList() {
@@ -92,11 +128,43 @@ public class StatisticsManager {
         this.monthList = monthList;
     }
 
-    public int getMonth() {
-        return month;
+    public int getCourseMonth() {
+        return courseMonth;
     }
 
-    public void setMonth(int month) {
-        this.month = month;
+    public void setCourseMonth(int courseMonth) {
+        this.courseMonth = courseMonth;
+    }
+
+    public int getStudentMonth() {
+        return studentMonth;
+    }
+
+    public void setStudentMonth(int studentMonth) {
+        this.studentMonth = studentMonth;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public Set<Student> getMyStudents() {
+        return myStudents;
+    }
+
+    public void setMyStudents(Set<Student> myStudents) {
+        this.myStudents = myStudents;
+    }
+
+    public PieChartModel getChart2() {
+        return chart2;
+    }
+
+    public void setChart2(PieChartModel chart2) {
+        this.chart2 = chart2;
     }
 }
