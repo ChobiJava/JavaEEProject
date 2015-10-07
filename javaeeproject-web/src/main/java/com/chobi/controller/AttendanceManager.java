@@ -15,6 +15,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
@@ -37,6 +38,7 @@ public class AttendanceManager {
     private List<Student> studentsPresent;
     private ScheduleModel schedule;
     private ScheduleEvent event;
+    private boolean redDay;
 
     public ScheduleModel getSchedule() {
         return schedule;
@@ -76,6 +78,13 @@ public class AttendanceManager {
 
     private User user;
 
+    public void redDayCheck(AjaxBehaviorEvent event) {
+        if (attendanceCourse != null) {
+            redDay = aFacade.checkRedDayForCourse(attendanceCourse);
+            System.out.println(redDay);
+        }
+    }
+
     public void selectDay(SelectEvent event) {
         System.out.println("hej");
         this.event = new DefaultScheduleEvent("", (Date) event.getObject(), (Date) event.getObject(), "red");
@@ -98,5 +107,13 @@ public class AttendanceManager {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         SessionManager sm = (SessionManager) session.getAttribute("sessionManager");
         user = sm.getUser();
+    }
+
+    public boolean isRedDay() {
+        return redDay;
+    }
+
+    public void setRedDay(boolean redDay) {
+        this.redDay = redDay;
     }
 }

@@ -2,19 +2,27 @@ package com.chobi.business.entities;
 
 import com.chobi.business.entities.superclasses.SuperEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 /**
  * Created by Chobii on 15/09/15.
  */
 
+@NamedQueries({
+        @NamedQuery(name = RedDay.FIND_REDDAY_FOR_COURSE, query = "SELECT distinct r from RedDay r where r.course like :course and r.redDay like :redday")
+})
+
+@NamedEntityGraphs({
+        @NamedEntityGraph(name = RedDay.GRAPH_DEEP, attributeNodes = @NamedAttributeNode("course"))
+})
+
 @Entity
 @Table(name = "redday")
-public class RedDay extends SuperEntity{
+public class RedDay extends SuperEntity {
+
+    public static final String FIND_REDDAY_FOR_COURSE = "redday.findforcourse";
+    public static final String GRAPH_DEEP = "redday.deep";
 
     private LocalDate redDay;
     @OneToOne

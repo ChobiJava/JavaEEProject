@@ -2,6 +2,7 @@ package com.chobi.boundary.facades;
 
 import com.chobi.business.entities.Attendance;
 import com.chobi.business.entities.Course;
+import com.chobi.business.entities.RedDay;
 import com.chobi.business.entities.Student;
 import com.chobi.business.service.CRUDService;
 import com.chobi.business.util.QueryParams;
@@ -104,5 +105,25 @@ public class AttendanceFacade {
         stats.put("absent", absent);
 
         return stats;
+    }
+
+    public boolean checkRedDayForCourse(Course course) {
+        LocalDate today = LocalDate.now();
+        RedDay r = new RedDay();
+        try {
+            r = crudService.findByNamedQuery(
+                    RedDay.class,
+                    RedDay.FIND_REDDAY_FOR_COURSE,
+                    RedDay.GRAPH_DEEP,
+                    QueryParams
+                            .with("course", course)
+                            .and("redday", today)
+                            .parameters()
+            ).get(0);
+        } catch (Exception e) {
+
+        }
+
+        return r.getId() != 0;
     }
 }
