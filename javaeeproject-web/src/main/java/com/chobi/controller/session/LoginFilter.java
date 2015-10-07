@@ -1,4 +1,4 @@
-package com.chobi.controller;
+package com.chobi.controller.session;
 
 
 import javax.servlet.*;
@@ -19,7 +19,7 @@ public class LoginFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
-        SessionManager sm = (SessionManager) req.getSession().getAttribute("sessionManager");
+        SessionBean sm = (SessionBean) req.getSession().getAttribute("sessionManager");
         if (sm == null || !sm.isLoggedIn()) {
             String contextPath = ((HttpServletRequest)servletRequest).getContextPath();
             ((HttpServletResponse)servletResponse).sendRedirect(contextPath + "/login.xhtml");

@@ -1,4 +1,4 @@
-package com.chobi.controller;
+package com.chobi.controller.students;
 
 import com.chobi.boundary.facades.StudentFacade;
 import com.chobi.business.entities.ContactInfo;
@@ -15,13 +15,13 @@ import javax.inject.Inject;
  */
 @ManagedBean
 @ViewScoped
-public class AddStudent {
+public class AddStudentBean {
 
+    @Inject
+    private StudentFacade sFacade;
     private Student newStudent;
     private ContactInfo newContact;
     private UploadedFile file;
-    @Inject
-    private StudentFacade sFacade;
 
     @PostConstruct
     private void init() {
@@ -31,7 +31,6 @@ public class AddStudent {
 
     public String addStudente() {
         byte[] fileToPersist = file.getContents();
-        System.out.println("hello?");
         newStudent.setContactInfo(newContact);
         newStudent.setPhoto(fileToPersist);
         sFacade.addStudent(newStudent);

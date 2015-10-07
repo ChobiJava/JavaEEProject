@@ -9,7 +9,7 @@
 <f:view>
     <ui:include src="../resources/templates/header.xhtml" />
     <ui:include src="../resources/templates/menu.xhtml" />
-    <ui:repeat value="#{courseManager.forTeacher()}" var="_course">
+    <ui:repeat value="#{coursesBean.forTeacher()}" var="_course">
         <p:panelGrid columns="1">
             <h:outputText value="#{_course.courseName}" />
             <h:outputText value="#{_course.points}" />

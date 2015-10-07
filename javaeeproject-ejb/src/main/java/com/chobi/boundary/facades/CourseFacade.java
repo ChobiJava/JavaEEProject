@@ -5,6 +5,7 @@ import com.chobi.business.entities.Course;
 import com.chobi.business.entities.Student;
 import com.chobi.business.entities.User;
 import com.chobi.business.service.CRUDService;
+import com.chobi.business.util.QueryParams;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -40,6 +41,16 @@ public class CourseFacade {
                 Course.FIND_ALL,
                 Course.GRAPH_DEEP
         );
+    }
+
+    public Course getOneCourseWithStudents(int id) {
+        return crudService.findByNamedQuery(
+                Course.class,
+                Course.FIND_ONE,
+                Course.GRAPH_DEEP,
+                QueryParams.with("id", id)
+                .parameters()
+        ).get(0);
     }
 
     public Course addCourse(Course course) {

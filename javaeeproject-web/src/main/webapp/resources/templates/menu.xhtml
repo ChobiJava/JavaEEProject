@@ -13,22 +13,20 @@
                 <li><h:form><h:commandLink action="#{navigationBean.redirectToAdmin}" value="HOME"/> </h:form></li>
                 <li class='active has-sub'><a href='#'><span>Courses</span></a>
                     <ul>
-                        <li><h:form><h:commandLink action="#{navigationBean.redirectToMyCourses}" value="My Courses"/> </h:form></li>
-                        <li><h:form><h:commandLink action="#{navigationBean.redirectToCourses}" value="All Courses" /> </h:form></li>
-                        <li><h:form><h:commandLink action="/school/courses/addcourse" value="Add Course" /> </h:form></li>
+                        <li><h:form><h:commandLink action="/school/courses.xhtml" value="My Courses"/> </h:form></li>
+                        <li><h:form><h:commandLink action="/school/courses/addcourse.xhtml" value="Add Course" /> </h:form></li>
                     </ul>
                 </li>
                 <li class='active has-sub'><a href='#'><span>Students</span></a>
                     <ul>
-                        <li><h:form><h:commandLink action="#{navigationBean.redirectToLogin}" value="My Students"/> </h:form></li>
-                        <li><h:form><h:commandLink action="#{navigationBean.redirectToStudentView}" value="All Students" /> </h:form></li>
+                        <li><h:form><h:commandLink action="/school/students.xhtml" value="My Students"/> </h:form></li>
                         <li><h:form><h:commandLink action="/school/students/addstudent" value="Add Student"/></h:form></li>
                     </ul>
                 </li>
                 <li class='active has-sub'><a href='#'><span>Attendance</span></a>
                     <ul>
-                        <li><h:form><h:commandLink action="/app/attendance.xhtml" value="Take Attendance"/> </h:form></li>
-                        <li><h:form><h:commandLink action="/app/statistics.xhtml" value="View Attendance"/> </h:form></li>
+                        <li><h:form><h:commandLink action="/school/attendance/takeattendance.xhtml" value="Take Attendance"/> </h:form></li>
+                        <li><h:form><h:commandLink action="/school/attendance/viewattendance.xhtml" value="View Attendance"/> </h:form></li>
                     </ul>
                 </li>
                 <li><a href='#'><span>About</span></a></li>
@@ -52,8 +50,8 @@
                 </li>
                 <li class='active has-sub'><a href='#'><span>Students</span></a>
                     <ul>
-                        <li><h:form><h:commandLink action="#{navigationBean.redirectToStudentView}" value="All Students" /> </h:form></li>
-                        <li><h:form><h:commandLink action="#{navigationBean.redirectToLogin}" value="Add Student"/> </h:form></li>
+                        <li><h:form><h:commandLink action="/school/students/student.xhtml" value="All Students" /> </h:form></li>
+                        <li><h:form><h:commandLink action="/school/students/addstudent" value="Add Student"/> </h:form></li>
                     </ul>
                 </li>
                 <li class='active has-sub'><a href='#'><span>Attendance</span></a>

@@ -1,10 +1,11 @@
-package com.chobi.controller;
+package com.chobi.controller.courses;
 
 import com.chobi.boundary.facades.AttendanceFacade;
 import com.chobi.boundary.facades.CourseFacade;
 import com.chobi.business.entities.Course;
 import com.chobi.business.entities.Student;
 import com.chobi.business.entities.User;
+import com.chobi.controller.session.SessionBean;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -19,7 +20,7 @@ import java.util.List;
  */
 @ManagedBean
 @ViewScoped
-public class CourseManager {
+public class CoursesBean {
 
     @Inject
     private CourseFacade producer;
@@ -99,7 +100,7 @@ public class CourseManager {
 
     private void retrieveUserForSession() {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        SessionManager sm = (SessionManager) session.getAttribute("sessionManager");
+        SessionBean sm = (SessionBean) session.getAttribute("sessionManager");
         user = sm.getUser();
     }
 

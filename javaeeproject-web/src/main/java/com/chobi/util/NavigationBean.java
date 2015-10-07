@@ -1,4 +1,4 @@
-package com.chobi.controller;
+package com.chobi.util;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;

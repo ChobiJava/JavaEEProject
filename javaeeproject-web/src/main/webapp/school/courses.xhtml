@@ -4,8 +4,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 <f:view>
-    <h:outputLabel value="Hello, world"/>
+    <ui:include src="../resources/templates/header.xhtml" />
+    <ui:include src="../resources/templates/menu.xhtml" />
+    <div class="flex">
+        <p:panelGrid styleClass="flexC">
+            <ui:repeat value="#{coursesBean.all()}" var="_course">
+                <p:panelGrid columns="1">
+                    <h:outputText value="#{_course.courseName}" />
+                    <h:outputText value="#{_course.points}" />
+                    <f:facet name="footer">
+                        <h:link value="EDIT" outcome="/school/courses/course.xhtml">
+                            <f:param name="id" value="#{_course.id}" />
+                        </h:link>
+                    </f:facet>
+                </p:panelGrid>
+            </ui:repeat>
+        </p:panelGrid>
+    </div>
 </f:view>
 </html>

@@ -1,7 +1,8 @@
-package com.chobi.controller;
+package com.chobi.controller.session;
 
 import com.chobi.business.entities.User;
 import com.chobi.business.entities.UserType;
+import com.chobi.util.NavigationBean;
 import com.chobi.service.UserRepository;
 
 import javax.faces.application.FacesMessage;
@@ -18,7 +19,7 @@ import java.io.Serializable;
 
 @ManagedBean(name = "sessionManager")
 @SessionScoped
-public class SessionManager implements Serializable {
+public class SessionBean implements Serializable {
 
     private boolean loggedIn;
     private boolean principal;
@@ -37,7 +38,7 @@ public class SessionManager implements Serializable {
             loggedIn = true;
             checkifprincipal();
             System.out.println(user.getUserName());
-            return "/app/admin.xhtml";
+            return "/school/admin.xhtml";
         } else {
             FacesContext fContext = FacesContext.getCurrentInstance();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed", "No such user");

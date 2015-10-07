@@ -4,8 +4,49 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:include src="/resources/templates/header.xhtml" />
+<ui:include src="/resources/templates/menu.xhtml" />
+<h:body>
+    <f:view>
+        <div class="flex">
+            <p:panelGrid styleClass="flexC" columns="1">
+                <h:form>
+                    <p:growl sticky="false" showDetail="true" life="2000"/>
+                    <p:panelGrid columns="1" style="margin: 15px auto; text-align: center;" >
+                        <p:selectOneMenu styleClass="attMenu" value="#{statisticsBean.course}" converter="omnifaces.SelectItemsConverter" style="width: 200px;">
+                            <f:selectItem itemLabel="Select Course" />
+                            <f:selectItems value="#{statisticsBean.myCourses}" var="c" itemLabel="#{c.courseName}" itemValue="#{c}" />
+                        </p:selectOneMenu>
+                        <p:selectOneMenu styleClass="attMenu" value="#{statisticsBean.courseMonth}" style="width: 200px; text-align: center;" >
+                            <f:selectItem itemLabel="Select Month" />
+                            <f:selectItems value="#{statisticsBean.monthList}" />
+                        </p:selectOneMenu>
+                        <p:commandButton action="#{statisticsBean.populateChart()}" value="Show" update=":pie" ajax="false"/>
+                    </p:panelGrid>
+                </h:form>
+                <p:chart id="pie" type="pie" model="#{statisticsBean.chart}" rendered="#{statisticsBean.course == null ? false : true ||statisticsBean.courseMonth == 0 ? false : true}" style="width: 400px; height: 300px; margin: 0 auto;"/>
+            </p:panelGrid>
+            <p:panelGrid styleClass="flexC" columns="1">
+                <h:form>
+                    <p:growl sticky="false" showDetail="true" life="2000"/>
+                    <p:panelGrid columns="1" style="margin: 15px auto; text-align: center;" >
+                        <p:selectOneMenu styleClass="attMenu" value="#{statisticsBean.student}" converter="omnifaces.SelectItemsConverter" style="width: 200px;">
+                            <f:selectItem itemLabel="Select Student" />
+                            <f:selectItems value="#{statisticsBean.myStudents}" var="s" itemLabel="#{s.firstName} #{s.lastName}" itemValue="#{s}" />
+                        </p:selectOneMenu>
+                        <p:selectOneMenu styleClass="attMenu" value="#{statisticsBean.studentMonth}" style="width: 200px; text-align: center;" >
+                            <f:selectItem itemLabel="Select Month" />
+                            <f:selectItems value="#{statisticsBean.monthList}" />
+                        </p:selectOneMenu>
+                        <p:commandButton action="#{statisticsBean.populateChart2()}" value="Show" update=":pie2" ajax="false"/>
+                    </p:panelGrid>
+                </h:form>
+                <p:chart id="pie2" type="pie" model="#{statisticsBean.chart2}" rendered="#{statisticsBean.student == null ? false : true ||statisticsBean.studentMonth == 0 ? false : true}" style="width: 400px; height: 300px; margin: 0 auto;"/>
+            </p:panelGrid>
+        </div>
+    </f:view>
+</h:body>
 </html>

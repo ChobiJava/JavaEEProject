@@ -12,19 +12,19 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
-    
+
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
-    
+
     <filter>
         <filter-name>LoginFilter</filter-name>
-        <filter-class>com.chobi.controller.LoginFilter</filter-class>
+        <filter-class>com.chobi.controller.session.LoginFilter</filter-class>
     </filter>
 
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
-        <url-pattern>/app/*</url-pattern>
+        <url-pattern>/school/*</url-pattern>
     </filter-mapping>
 
     <filter>

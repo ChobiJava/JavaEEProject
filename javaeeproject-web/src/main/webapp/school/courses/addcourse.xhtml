@@ -14,25 +14,25 @@
             <p:growl autoUpdate="true" />
             <p:panelGrid styleClass="flexC" columns="2">
                 <h:outputText value="Course Name"/>
-                <p:inputText value="#{addCourse.newCourse.courseName}" />
+                <p:inputText value="#{addCourseBean.newCourse.courseName}" />
                 <h:outputText value="Course Points"/>
-                <p:inputText value="#{addCourse.newCourse.points}" />
+                <p:inputText value="#{addCourseBean.newCourse.points}" />
                 <h:outputText value="Course Start"/>
-                <p:calendar value="#{addCourse.start}" locale="sv" />
+                <p:calendar value="#{addCourseBean.start}" locale="sv" />
                 <h:outputText value="Course End"/>
-                <p:calendar value="#{addCourse.end}" locale="sv" />
+                <p:calendar value="#{addCourseBean.end}" locale="sv" />
                 <h:outputText value="Choose Teacher"/>
-                <p:selectOneMenu value="#{addCourse.teacher}" converter="omnifaces.SelectItemsConverter" style="width: 200px;">
-                    <f:selectItems value="#{addCourse.teachers}" var="t" itemLabel="#{t.firstName} #{t.lastName}" />
+                <p:selectOneMenu value="#{addCourseBean.teacher}" converter="omnifaces.SelectItemsConverter" style="width: 200px;">
+                    <f:selectItems value="#{addCourseBean.teachers}" var="t" itemLabel="#{t.firstName} #{t.lastName}" />
                 </p:selectOneMenu>
                 <h:outputText value="Add Student(s)"/>
-                <p:autoComplete value="#{addCourse.studentsToAddToCourse}" var="stad" completeMethod="#{addCourse.autoCompleteStudents}"
+                <p:autoComplete value="#{addCourseBean.studentsInClass}" var="stad" completeMethod="#{addCourseBean.autoCompleteStudents}"
                                 itemLabel="#{stad.firstName}" itemValue="#{stad}" converter="#{entityConverter}" forceSelection="true" multiple="true">
-                    <p:ajax event="itemSelect" listener="#{addCourse.handleSelectStudent}"/>
-                    <p:ajax event="itemUnselect" listener="#{addCourse.handleUnSelectStudent}" />
+                    <p:ajax event="itemSelect" listener="#{addCourseBean.handleSelectStudent}"/>
+                    <p:ajax event="itemUnselect" listener="#{addCourseBean.handleUnSelectStudent}" />
                 </p:autoComplete>
                 <f:facet name="footer">
-                    <p:commandButton styleClass="btnAdd" action="#{addCourse.addCoursee}" value="Add Course" ajax="false"/>
+                    <p:commandButton styleClass="btnAdd" action="#{addCourseBean.addCoursee}" value="Add Course" ajax="false"/>
                 </f:facet>
             </p:panelGrid>
         </h:form>

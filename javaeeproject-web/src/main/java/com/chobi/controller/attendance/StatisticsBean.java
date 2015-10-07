@@ -1,4 +1,4 @@
-package com.chobi.controller;
+package com.chobi.controller.attendance;
 
 import com.chobi.boundary.facades.AttendanceFacade;
 import com.chobi.boundary.facades.CourseFacade;
@@ -6,6 +6,7 @@ import com.chobi.boundary.facades.StudentFacade;
 import com.chobi.business.entities.Course;
 import com.chobi.business.entities.Student;
 import com.chobi.business.entities.User;
+import com.chobi.controller.session.SessionBean;
 import org.primefaces.model.chart.PieChartModel;
 
 import javax.annotation.PostConstruct;
@@ -25,7 +26,7 @@ import java.util.Set;
  */
 @ManagedBean
 @ViewScoped
-public class StatisticsManager {
+public class StatisticsBean {
 
     @Inject
     private AttendanceFacade aFacade;
@@ -66,7 +67,7 @@ public class StatisticsManager {
 
     private void retrieveUserForSession() {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        SessionManager sm = (SessionManager) session.getAttribute("sessionManager");
+        SessionBean sm = (SessionBean) session.getAttribute("sessionManager");
         user = sm.getUser();
     }
 

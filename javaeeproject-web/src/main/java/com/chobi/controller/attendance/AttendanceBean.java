@@ -1,4 +1,4 @@
-package com.chobi.controller;
+package com.chobi.controller.attendance;
 
 import com.chobi.boundary.facades.AttendanceFacade;
 import com.chobi.boundary.facades.CourseFacade;
@@ -6,6 +6,7 @@ import com.chobi.business.entities.Course;
 import com.chobi.business.entities.RedDay;
 import com.chobi.business.entities.Student;
 import com.chobi.business.entities.User;
+import com.chobi.controller.session.SessionBean;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
@@ -33,7 +34,7 @@ import java.util.stream.Collectors;
 
 @ManagedBean
 @ViewScoped
-public class AttendanceManager {
+public class AttendanceBean {
 
     @Inject
     private CourseFacade cFacade;
@@ -112,7 +113,7 @@ public class AttendanceManager {
 
     private void retrieveUserForSession() {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        SessionManager sm = (SessionManager) session.getAttribute("sessionManager");
+        SessionBean sm = (SessionBean) session.getAttribute("sessionManager");
         user = sm.getUser();
     }
 

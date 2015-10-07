@@ -22,9 +22,9 @@ import javax.inject.Named;
 @RequestScoped
 public class EntityConverter implements Converter {
 
-    private static final String EDIT_STUDENT = "/app/edit-student.xhtml";
+    private static final String EDIT_STUDENT = "/school/students/student.xhtml";
     private static final String EDIT_TEACHER = "/app/edit-teacher.xhtml";
-    private static final String EDIT_COURSE  = "/app/edit-course.xhtml";
+    private static final String EDIT_COURSE  = "/school/courses/course.xhtml";
     private static final String ATTENDANCE = "/app/attendance.xhtml";
     private static final String ADD_COURSE = "/school/courses/addcourse.xhtml";
     private static final String SCHOOL_DAY = "/app/school-days.xhtml";
@@ -61,11 +61,11 @@ public class EntityConverter implements Converter {
         } else if (view.equals(EDIT_COURSE)) {
             try {
                 int id = Integer.valueOf(value);
-                return courseFacade.getOneCourse(id);
+                return courseFacade.getOneCourseWithStudents(id);
             } catch (NumberFormatException e) {
                 throw new ConverterException("Not a valid Course: " + value, e);
             }
-        }else if(view.equals(ATTENDANCE)) {
+        } else if(view.equals(ATTENDANCE)) {
             try {
                 int id = Integer.valueOf(value);
                 return courseFacade.getOneCourse(id);

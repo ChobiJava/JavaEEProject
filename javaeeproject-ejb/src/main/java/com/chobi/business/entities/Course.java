@@ -16,7 +16,8 @@ import java.util.List;
  */
 
 @NamedQueries({
-        @NamedQuery(name = Course.FIND_ALL, query = "select distinct c from Course c")
+        @NamedQuery(name = Course.FIND_ALL, query = "select distinct c from Course c"),
+        @NamedQuery(name = Course.FIND_ONE, query = "select distinct c from Course c where c.id like :id")
 })
 @NamedEntityGraphs({
         @NamedEntityGraph(name = Course.GRAPH_DEEP,

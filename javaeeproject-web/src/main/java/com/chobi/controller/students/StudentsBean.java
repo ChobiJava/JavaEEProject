@@ -1,4 +1,4 @@
-package com.chobi.controller;
+package com.chobi.controller.students;
 
 import com.chobi.boundary.facades.StudentFacade;
 import com.chobi.business.entities.Student;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 @Named
 @RequestScoped
-public class viewStudents {
+public class StudentsBean {
 
     @Inject
     private StudentFacade sFacade;

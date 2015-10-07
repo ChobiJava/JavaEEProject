@@ -16,17 +16,17 @@
         <p:growl id="bajs" />
         <p:panelGrid columns="2" style="margin: 15px auto;">
             <p:outputLabel value="Course:" />
-            <p:selectOneMenu value="#{attendanceManager.attendanceCourse}" converter="omnifaces.SelectItemsConverter" style="width: 200px;" >
+            <p:selectOneMenu value="#{attendanceBean.attendanceCourse}" converter="omnifaces.SelectItemsConverter" style="width: 200px;" >
                 <f:selectItem itemLabel="Select One" />
-                <f:selectItems var="course" value="#{attendanceManager.myCourses}" itemLabel="#{course.courseName}" itemValue="#{course}" />
-                <p:ajax event="valueChange" process="@form" immediate="false" partialSubmit="true" update=":studentList" listener="#{attendanceManager.redDayCheck}" />
+                <f:selectItems var="course" value="#{attendanceBean.myCourses}" itemLabel="#{course.courseName}" itemValue="#{course}" />
+                <p:ajax event="valueChange" process="@form" immediate="false" partialSubmit="true" update=":studentList" listener="#{attendanceBean.redDayCheck}" />
             </p:selectOneMenu>
         </p:panelGrid>
     </h:form>
     <h:form id="studentList" >
-        <p:dataTable id="howdy" var="student" rendered="#{attendanceManager.attendanceCourse == null ? false : true and attendanceManager.redDay == false}" value="#{attendanceManager.attendanceCourse.students}" selection="#{attendanceManager.studentsPresent}" rowKey="#{student.id}" style="margin: 0 auto;">
+        <p:dataTable id="howdy" var="student" rendered="#{attendanceBean.attendanceCourse == null ? false : true and attendanceBean.redDay == false}" value="#{attendanceBean.attendanceCourse.students}" selection="#{attendanceBean.studentsPresent}" rowKey="#{student.id}" style="margin: 0 auto;">
             <f:facet name="header">
-                Attendance for #{attendanceManager.attendanceCourse.courseName}
+                Attendance for #{attendanceBean.attendanceCourse.courseName}
             </f:facet>
             <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
             <p:column headerText="Name">
@@ -37,11 +37,11 @@
             </p:column>
 
             <f:facet name="footer">
-                <p:commandButton action="#{attendanceManager.saveAttendance}" value="Submit" >
+                <p:commandButton action="#{attendanceBean.saveAttendance}" value="Submit" >
                 </p:commandButton>
             </f:facet>
         </p:dataTable>
-        <h:outputText rendered="#{attendanceManager.attendanceCourse != null and attendanceManager.redDay}" value="No Attendance today" />
+        <h:outputText rendered="#{attendanceBean.attendanceCourse != null and attendanceBean.redDay}" value="No Attendance today" />
     </h:form>
     </p:panelGrid>
 </div>

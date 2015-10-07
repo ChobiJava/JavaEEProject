@@ -12,39 +12,40 @@
     <ui:include src="../resources/templates/header.xhtml" />
     <ui:include src="../resources/templates/menu.xhtml" />
     <f:metadata>
-        <f:viewParam name="id" value="#{editStudent.student}"
+        <f:viewParam name="id" value="#{editStudentBean.student}"
                      converter="#{entityConverter}" converterMessage="Unknown product, please use a link from within the system."
                      required="true" requiredMessage="Bad request, please use a link from within the system."
                 />
     </f:metadata>
     <div class="flex">
 
-            <h:form rendered="#{not empty editStudent.student}" enctype="multipart/form-data">
-                <p:panelGrid styleClass="flexC" columns="2" >
+        <h:form rendered="#{not empty editStudentBean.student}" enctype="multipart/form-data">
+            <p:panelGrid styleClass="flexC" columns="2" >
                 <h:outputText value="First Name" />
-                <p:inputText value="#{editStudent.student.firstName}" />
+                <p:inputText value="#{editStudentBean.student.firstName}" />
                 <h:outputText value="Last Name" />
-                <p:inputText value="#{editStudent.student.lastName}" />
+                <p:inputText value="#{editStudentBean.student.lastName}" />
+                <h:
                 <h:outputText value="Adress" />
-                <p:inputText value="#{editStudent.student.contactInfo.adress}" />
+                <p:inputText value="#{editStudentBean.student.contactInfo.adress}" />
                 <h:outputText value="Zip" />
-                <p:inputText value="#{editStudent.student.contactInfo.zip}" />
+                <p:inputText value="#{editStudentBean.student.contactInfo.zip}" />
                 <h:outputText value="City" />
-                <p:inputText value="#{editStudent.student.contactInfo.city}" />
+                <p:inputText value="#{editStudentBean.student.contactInfo.city}" />
                 <h:outputText value="Phone" />
-                <p:inputText value="#{editStudent.student.contactInfo.phone}" />
+                <p:inputText value="#{editStudentBean.student.contactInfo.phone}" />
                 <h:outputText value="Email" />
-                <p:inputText value="#{editStudent.student.contactInfo.email}" />
+                <p:inputText value="#{editStudentBean.student.contactInfo.email}" />
                 <h:outputText value="Photo" />
-                <p:fileUpload value="#{editStudent.file}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                <p:fileUpload value="#{editStudentBean.file}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
                 <f:facet name="footer">
-                    <p:commandButton styleClass="btnAdd" value="save" action="#{editStudent.save}" ajax="false" />
+                    <p:commandButton styleClass="btnAdd" value="save" action="#{editStudentBean.save}" ajax="false" />
                 </f:facet>
                 <f:facet name="footer">
-                    <p:commandButton styleClass="btnAdd" value="Remove this Student" action="#{editStudent.removeStudent}" />
+                    <p:commandButton styleClass="btnAdd" value="Remove this Student" action="#{editStudentBean.removeStudent}" />
                 </f:facet>
-                </p:panelGrid>
-            </h:form>
+            </p:panelGrid>
+        </h:form>
 
     </div>
 </f:view>

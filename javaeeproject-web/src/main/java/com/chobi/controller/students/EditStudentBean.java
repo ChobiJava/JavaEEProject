@@ -1,4 +1,4 @@
-package com.chobi.controller;
+package com.chobi.controller.students;
 
 import com.chobi.boundary.facades.StudentFacade;
 import com.chobi.business.entities.Student;
@@ -13,34 +13,12 @@ import javax.inject.Inject;
  */
 @ManagedBean
 @ViewScoped
-public class editStudent {
-
-    private Student student;
-    private UploadedFile file;
-
-    public UploadedFile getFile() {
-        return file;
-    }
-
-    public void setFile(UploadedFile file) {
-        this.file = file;
-    }
+public class EditStudentBean {
 
     @Inject
     StudentFacade facade;
-//
-//    @PostConstruct
-//    private void init() {
-//        student = new Student();
-//    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
+    private Student student;
+    private UploadedFile file;
 
     public String save() {
         byte[] fileToPersist = file.getContents();
@@ -52,6 +30,22 @@ public class editStudent {
     public String removeStudent() {
         facade.deleteStudent(student);
         return "/app/studentView.xhtml?faces-redirect=true";
+    }
+
+    public UploadedFile getFile() {
+        return file;
+    }
+
+    public void setFile(UploadedFile file) {
+        this.file = file;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
 }

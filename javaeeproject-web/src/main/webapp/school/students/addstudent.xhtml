@@ -9,30 +9,29 @@
 <f:view>
     <ui:include src="/resources/templates/header.xhtml" />
     <ui:include src="/resources/templates/menu.xhtml" />
-
     <div class="flex">
-        <h:form>
+        <h:form enctype="multipart/form-data">
             <p:panelGrid styleClass="flexC" columns="2">
                 <h:outputText value="First Name" />
-                <p:inputText value="#{addStudent.newStudent.firstName}"/>
+                <p:inputText value="#{addStudentBean.newStudent.firstName}"/>
                 <h:outputText value="Last Name" />
-                <p:inputText value="#{addStudent.newStudent.lastName}"/>
+                <p:inputText value="#{addStudentBean.newStudent.lastName}"/>
                 <h:outputText value="SSN" />
-                <p:inputText value="#{addStudent.newStudent.ssn}"/>
+                <p:inputText value="#{addStudentBean.newStudent.ssn}"/>
                 <h:outputText value="Adress" />
-                <p:inputText value="#{addStudent.newContact.adress}"/>
+                <p:inputText value="#{addStudentBean.newContact.adress}"/>
                 <h:outputText value="Zip" />
-                <p:inputText value="#{addStudent.newContact.zip}"/>
+                <p:inputText value="#{addStudentBean.newContact.zip}"/>
                 <h:outputText value="City" />
-                <p:inputText value="#{addStudent.newContact.city}"/>
+                <p:inputText value="#{addStudentBean.newContact.city}"/>
                 <h:outputText value="Phone" />
-                <p:inputText value="#{addStudent.newContact.phone}"/>
+                <p:inputText value="#{addStudentBean.newContact.phone}"/>
                 <h:outputText value="Email" />
-                <p:inputText value="#{addStudent.newContact.email}"/>
+                <p:inputText value="#{addStudentBean.newContact.email}"/>
                 <h:outputText value="Photo" />
-                <p:fileUpload value="#{addStudent.file}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                <p:fileUpload value="#{addStudentBean.file}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
                 <f:facet name="footer" >
-                    <p:commandButton styleClass="btnAdd" action="#{addStudent.addStudente}" value="Add" ajax="false"/>
+                    <p:commandButton styleClass="btnAdd" action="#{addStudentBean.addStudente}" value="Add" ajax="false"/>
                 </f:facet>
             </p:panelGrid>
         </h:form>
