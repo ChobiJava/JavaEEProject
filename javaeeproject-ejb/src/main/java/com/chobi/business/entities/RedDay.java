@@ -10,7 +10,8 @@ import java.time.LocalDate;
  */
 
 @NamedQueries({
-        @NamedQuery(name = RedDay.FIND_REDDAY_FOR_COURSE, query = "SELECT distinct r from RedDay r where r.course like :course and r.redDay like :redday")
+        @NamedQuery(name = RedDay.FIND_REDDAY_FOR_COURSE_AND_DATE, query = "SELECT distinct r from RedDay r where r.course like :course and r.redDay like :redday"),
+        @NamedQuery(name = RedDay.FIND_REDDAYS_FOR_COURSE, query = "SELECT distinct r from RedDay r where r.course like :course")
 })
 
 @NamedEntityGraphs({
@@ -21,7 +22,15 @@ import java.time.LocalDate;
 @Table(name = "redday")
 public class RedDay extends SuperEntity {
 
-    public static final String FIND_REDDAY_FOR_COURSE = "redday.findforcourse";
+    public RedDay(LocalDate date, Course course) {
+        this.redDay = date;
+        this.course = course;
+    }
+
+    public RedDay() {}
+
+    public static final String FIND_REDDAY_FOR_COURSE_AND_DATE = "redday.findforcourseanddate";
+    public static final String FIND_REDDAYS_FOR_COURSE = "redday.findallforcourse";
     public static final String GRAPH_DEEP = "redday.deep";
 
     private LocalDate redDay;

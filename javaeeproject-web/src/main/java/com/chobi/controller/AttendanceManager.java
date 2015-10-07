@@ -3,6 +3,7 @@ package com.chobi.controller;
 import com.chobi.boundary.facades.AttendanceFacade;
 import com.chobi.boundary.facades.CourseFacade;
 import com.chobi.business.entities.Course;
+import com.chobi.business.entities.RedDay;
 import com.chobi.business.entities.Student;
 import com.chobi.business.entities.User;
 import org.primefaces.event.SelectEvent;
@@ -18,8 +19,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Chobii on 28/09/15.
@@ -36,6 +42,7 @@ public class AttendanceManager {
     private List<Course> myCourses;
     private Course attendanceCourse;
     private List<Student> studentsPresent;
+    private List<RedDay> redDays;
     private ScheduleModel schedule;
     private ScheduleEvent event;
     private boolean redDay;
@@ -107,6 +114,38 @@ public class AttendanceManager {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         SessionManager sm = (SessionManager) session.getAttribute("sessionManager");
         user = sm.getUser();
+    }
+
+    public void recieveRedDays(AjaxBehaviorEvent event) {
+        if (attendanceCourse != null) {
+            schedule.clear();
+            redDays = aFacade.findAllRedDayForCourse(attendanceCourse);
+            if (!redDays.isEmpty()) {
+                for (RedDay r : redDays) {
+                    Date date = Date.from(r.getRedDay().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+                    DefaultScheduleEvent e = new DefaultScheduleEvent("", date, date, "red");
+                    schedule.addEvent(e);
+                }
+            } else {
+                redDays = new ArrayList<>();
+            }
+        }
+    }
+
+    public void saveRedDays() {
+        for (ScheduleEvent e : schedule.getEvents()) {
+            LocalDate d = Instant.ofEpochMilli(e.getStartDate().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+            RedDay r = null;
+            try {
+                r = redDays.stream().filter(re -> re.getRedDay().equals(d)).collect(Collectors.toList()).get(0);
+            } catch (Exception ex) { }
+            if (r == null) {
+                r = new RedDay(d, attendanceCourse);
+                aFacade.saveRedDays(r);
+            }
+        }
+
+
     }
 
     public boolean isRedDay() {

@@ -5,18 +5,34 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-        xmlns:p="http://primefaces.org/ui"
-        xmlns:fn="http://java.sun.com/jstl/functions">
+      xmlns:p="http://primefaces.org/ui">
+
 <ui:include src="../resources/templates/header.xhtml" />
 <ui:include src="../resources/templates/menu.xhtml" />
 <h:body>
-<f:view>
-    <h:form>
-        <p:schedule id="schedule" timeZone="GMT+1" value="#{attendanceManager.schedule}" aspectRatio="2.0">
-            <p:ajax event="dateSelect" listener="#{attendanceManager.selectDay}" update="schedule"  />
-            <p:ajax event="eventSelect" listener="#{attendanceManager.deSelectDay}" update="schedule" />
-        </p:schedule>
-    </h:form>
-</f:view>
+    <f:view>
+        <div class="flex">
+            <p:panelGrid styleClass="flexC" columns="1">
+                <h:form>
+                    <p:growl id="bajs" />
+                    <p:panelGrid columns="2" style="margin: 15px auto;">
+                        <p:outputLabel value="Course:" />
+                        <p:selectOneMenu value="#{attendanceManager.attendanceCourse}" converter="omnifaces.SelectItemsConverter" style="width: 200px;" >
+                            <f:selectItem itemLabel="Select One" />
+                            <f:selectItems var="course" value="#{attendanceManager.myCourses}" itemLabel="#{course.courseName}" itemValue="#{course}" />
+                            <p:ajax event="valueChange" process="@form" immediate="false" partialSubmit="true" update=":sch1" listener="#{attendanceManager.recieveRedDays}" />
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                </h:form>
+                <h:form id="sch1" >
+                    <p:schedule id="schedule" timeZone="GMT+2" value="#{attendanceManager.schedule}" aspectRatio="2.0" style="width: 1000px;">
+                        <p:ajax event="dateSelect" listener="#{attendanceManager.selectDay}" update="schedule"  />
+                        <p:ajax event="eventSelect" listener="#{attendanceManager.deSelectDay}" update="schedule" />
+                    </p:schedule>
+                    <p:commandButton styleClass="btnAdd" value="Save" action="#{attendanceManager.saveRedDays}" />
+                </h:form>
+            </p:panelGrid>
+        </div>
+    </f:view>
 </h:body>
 </html>

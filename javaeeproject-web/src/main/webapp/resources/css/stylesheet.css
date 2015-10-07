@@ -265,8 +265,9 @@ input {
 }
 
 .red {
-    height: 100% !important;
+    height: 100%;
     background: transparent !important;
+    border: none; !important;
 
 }
 
@@ -275,9 +276,18 @@ input {
 }
 
 .fc-event-container {
-    height: 200px;
+    height: 50px; !important;
     background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Red_Cross.svg/1000px-Red_Cross.svg.png") center no-repeat !important;
     background-size: contain !important;
+    border: none;
+}
+
+.fc-content {
+    height: 100%;
+}
+
+.fc-event {
+    border: none !important;
 }
 
 .attMenu {

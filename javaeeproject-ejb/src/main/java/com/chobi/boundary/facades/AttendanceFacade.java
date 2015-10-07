@@ -113,7 +113,7 @@ public class AttendanceFacade {
         try {
             r = crudService.findByNamedQuery(
                     RedDay.class,
-                    RedDay.FIND_REDDAY_FOR_COURSE,
+                    RedDay.FIND_REDDAY_FOR_COURSE_AND_DATE,
                     RedDay.GRAPH_DEEP,
                     QueryParams
                             .with("course", course)
@@ -125,5 +125,24 @@ public class AttendanceFacade {
         }
 
         return r.getId() != 0;
+    }
+
+    public List<RedDay> findAllRedDayForCourse(Course course) {
+        List<RedDay> redDays = new ArrayList<>();
+
+        redDays = crudService.findByNamedQuery(
+                RedDay.class,
+                RedDay.FIND_REDDAYS_FOR_COURSE,
+                RedDay.GRAPH_DEEP,
+                QueryParams
+                        .with("course", course)
+                        .parameters()
+        );
+
+        return redDays;
+    }
+
+    public void saveRedDays(RedDay redDay) {
+        crudService.create(redDay);
     }
 }
