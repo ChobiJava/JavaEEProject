@@ -49,9 +49,6 @@ public class StudentFacade {
     }
 
     public void deleteStudent(Student student) {
-        student.getCourses().clear();
-        editStudent(student);
-
         crudService.delete(Student.class, student.getId());
     }
 

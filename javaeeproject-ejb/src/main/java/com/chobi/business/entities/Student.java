@@ -23,7 +23,8 @@ import java.util.List;
                           }),
         @NamedEntityGraph(name = Student.GRAPH_DEEP,
                           attributeNodes = {
-                                  @NamedAttributeNode("contactInfo")
+                                  @NamedAttributeNode("contactInfo"),
+                                  @NamedAttributeNode("courses")
                           }),
         @NamedEntityGraph(name = Student.GRAPH_WITH_TEACHER,
                           attributeNodes =

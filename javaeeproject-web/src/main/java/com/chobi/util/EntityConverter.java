@@ -26,6 +26,7 @@ public class EntityConverter implements Converter {
     private static final String EDIT_TEACHER = "/app/edit-teacher.xhtml";
     private static final String EDIT_COURSE  = "/app/edit-course.xhtml";
     private static final String ATTENDANCE = "/app/attendance.xhtml";
+    private static final String ADD_COURSE = "/school/courses/addcourse.xhtml";
 
     @Inject
     private StudentFacade studentFacade;
@@ -70,7 +71,14 @@ public class EntityConverter implements Converter {
             } catch (NumberFormatException e) {
                 throw new ConverterException("Not a valid Course: " + value, e);
             }
-        }else {
+        }else if (view.equals(ADD_COURSE)) {
+            try {
+                int id = Integer.valueOf(value);
+                return studentFacade.getOneStudent(id);
+            } catch (NumberFormatException e) {
+                throw new ConverterException("Not a valid Student: " + value, e);
+            }
+        } else {
             throw new ConverterException("How did you get here?");
         }
     }

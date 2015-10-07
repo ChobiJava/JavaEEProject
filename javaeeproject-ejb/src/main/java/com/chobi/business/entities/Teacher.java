@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "teacher")
 @NamedQueries({
-        @NamedQuery(name = Teacher.FIND_ALL , query = "select t from Teacher t")
+        @NamedQuery(name = Teacher.FIND_ALL , query = "select distinct t from Teacher t")
 
 })
 

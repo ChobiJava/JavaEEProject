@@ -284,12 +284,20 @@ input {
     width: 150px;
 }
 
-#flex {
+.flex {
     display: flex;
     justify-content: center;
 }
 
 .flexC {
     margin: 50px;
+}
+
+.btnAdd {
+    margin: 5px;
+}
+
+.ui-panelgrid-footer {
+    text-align: center !important;
 }
 

@@ -5,7 +5,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-        xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui">
 
 <f:view>
     <h:messages/>
@@ -17,19 +17,35 @@
                      required="true" requiredMessage="Bad request, please use a link from within the system."
                 />
     </f:metadata>
-    <h:form rendered="#{not empty editStudent.student}" enctype="multipart/form-data">
-    <h:inputText value="#{editStudent.student.firstName}" />
-    <h:inputText value="#{editStudent.student.lastName}" />
-    <h:inputText value="#{editStudent.student.contactInfo.adress}" />
-    <h:inputText value="#{editStudent.student.contactInfo.zip}" />
-    <h:inputText value="#{editStudent.student.contactInfo.city}" />
-    <h:inputText value="#{editStudent.student.contactInfo.email}" />
-    <h:inputText value="#{editStudent.student.contactInfo.phone}" />
-    <p:fileUpload value="#{editStudent.file}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
-    <p:commandButton value="save" action="#{editStudent.save}" ajax="false" />
-</h:form>
-    <h:form>
-        <h:commandButton value="Remove this Student" action="#{editStudent.removeStudent}" />
-    </h:form>
+    <div class="flex">
+
+            <h:form rendered="#{not empty editStudent.student}" enctype="multipart/form-data">
+                <p:panelGrid styleClass="flexC" columns="2" >
+                <h:outputText value="First Name" />
+                <p:inputText value="#{editStudent.student.firstName}" />
+                <h:outputText value="Last Name" />
+                <p:inputText value="#{editStudent.student.lastName}" />
+                <h:outputText value="Adress" />
+                <p:inputText value="#{editStudent.student.contactInfo.adress}" />
+                <h:outputText value="Zip" />
+                <p:inputText value="#{editStudent.student.contactInfo.zip}" />
+                <h:outputText value="City" />
+                <p:inputText value="#{editStudent.student.contactInfo.city}" />
+                <h:outputText value="Phone" />
+                <p:inputText value="#{editStudent.student.contactInfo.phone}" />
+                <h:outputText value="Email" />
+                <p:inputText value="#{editStudent.student.contactInfo.email}" />
+                <h:outputText value="Photo" />
+                <p:fileUpload value="#{editStudent.file}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                <f:facet name="footer">
+                    <p:commandButton styleClass="btnAdd" value="save" action="#{editStudent.save}" ajax="false" />
+                </f:facet>
+                <f:facet name="footer">
+                    <p:commandButton styleClass="btnAdd" value="Remove this Student" action="#{editStudent.removeStudent}" />
+                </f:facet>
+                </p:panelGrid>
+            </h:form>
+
+    </div>
 </f:view>
 </html>

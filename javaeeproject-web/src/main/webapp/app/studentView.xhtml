@@ -10,9 +10,9 @@
 <ui:include src="../resources/templates/header.xhtml" />
 <h:outputStylesheet library="css" name="stylesheet.css" />
 <f:view>
-    <div class="hej">
+    <div class="flex">
     <ui:repeat value="#{viewStudents.students}" var="_student">
-        <p:panelGrid columns="2" styleClass="studentPanel">
+        <p:panelGrid columns="2" styleClass="flexC">
             <f:facet name="header">
                 <p:graphicImage rendered="#{_student.photo == null ? false : true}" value="#{viewStudents.image}">
                     <f:param name="student_id" value="#{_student.id}" />

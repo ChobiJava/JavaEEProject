@@ -5,21 +5,37 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-        xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui">
 <f:view>
     <ui:include src="/resources/templates/header.xhtml" />
     <ui:include src="/resources/templates/menu.xhtml" />
-
-    <h:form>
-        <p:growl autoUpdate="true" />
-        <h:inputText value="#{addCourse.newCourse.courseName}" />
-        <h:inputText value="#{addCourse.newCourse.points}" />
-        <p:calendar value="#{addCourse.start}" locale="sv" />
-        <p:calendar value="#{addCourse.end}" locale="sv" />
-        <p:selectOneMenu value="#{addCourse.teacher}" converter="omnifaces.SelectItemsConverter">
-            <f:selectItems value="#{addCourse.teachers}" />
-        </p:selectOneMenu>
-        <p:commandButton action="#{addCourse.addCoursee}" value="Add Course" ajax="false"/>
-    </h:form>
+    <div class="flex">
+        <h:form>
+            <p:growl autoUpdate="true" />
+            <p:panelGrid styleClass="flexC" columns="2">
+                <h:outputText value="Course Name"/>
+                <p:inputText value="#{addCourse.newCourse.courseName}" />
+                <h:outputText value="Course Points"/>
+                <p:inputText value="#{addCourse.newCourse.points}" />
+                <h:outputText value="Course Start"/>
+                <p:calendar value="#{addCourse.start}" locale="sv" />
+                <h:outputText value="Course End"/>
+                <p:calendar value="#{addCourse.end}" locale="sv" />
+                <h:outputText value="Choose Teacher"/>
+                <p:selectOneMenu value="#{addCourse.teacher}" converter="omnifaces.SelectItemsConverter" style="width: 200px;">
+                    <f:selectItems value="#{addCourse.teachers}" var="t" itemLabel="#{t.firstName} #{t.lastName}" />
+                </p:selectOneMenu>
+                <h:outputText value="Add Student(s)"/>
+                <p:autoComplete value="#{addCourse.studentsToAddToCourse}" var="stad" completeMethod="#{addCourse.autoCompleteStudents}"
+                                itemLabel="#{stad.firstName}" itemValue="#{stad}" converter="#{entityConverter}" forceSelection="true" multiple="true">
+                    <p:ajax event="itemSelect" listener="#{addCourse.handleSelectStudent}"/>
+                    <p:ajax event="itemUnselect" listener="#{addCourse.handleUnSelectStudent}" />
+                </p:autoComplete>
+                <f:facet name="footer">
+                    <p:commandButton styleClass="btnAdd" action="#{addCourse.addCoursee}" value="Add Course" ajax="false"/>
+                </f:facet>
+            </p:panelGrid>
+        </h:form>
+    </div>
 </f:view>
 </html>

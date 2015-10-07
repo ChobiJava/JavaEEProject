@@ -3,6 +3,7 @@ package com.chobi.controller;
 import com.chobi.boundary.facades.StudentFacade;
 import com.chobi.business.entities.ContactInfo;
 import com.chobi.business.entities.Student;
+import org.primefaces.model.UploadedFile;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -18,6 +19,7 @@ public class AddStudent {
 
     private Student newStudent;
     private ContactInfo newContact;
+    private UploadedFile file;
     @Inject
     private StudentFacade sFacade;
 
@@ -28,8 +30,10 @@ public class AddStudent {
     }
 
     public String addStudente() {
+        byte[] fileToPersist = file.getContents();
         System.out.println("hello?");
         newStudent.setContactInfo(newContact);
+        newStudent.setPhoto(fileToPersist);
         sFacade.addStudent(newStudent);
         return "/app/studentView.xhtml";
     }
@@ -48,5 +52,13 @@ public class AddStudent {
 
     public void setNewContact(ContactInfo newContact) {
         this.newContact = newContact;
+    }
+
+    public UploadedFile getFile() {
+        return file;
+    }
+
+    public void setFile(UploadedFile file) {
+        this.file = file;
     }
 }
