@@ -29,7 +29,12 @@
                         <li><h:form><h:commandLink action="/school/attendance/viewattendance.xhtml" value="View Attendance"/> </h:form></li>
                     </ul>
                 </li>
-                <li><a href='#'><span>About</span></a></li>
+                <li class='active has-sub'><a href='#'><span>Management</span></a>
+                    <ul>
+                        <li><h:form><h:commandLink action="/school/management/schooldays.xhtml" value="Manage Schooldays"/> </h:form></li>
+                        <li><h:form><h:commandLink action="/school/attendance/attendancestatistics" value="Statistics"/> </h:form></li>
+                    </ul>
+                </li>
                 <li class='active has-sub last'><a href='#'><span class="fa fa-user"></span></a>
                     <ul>
                         <li><h:form><h:commandLink action="#{navigationBean.redirectToLogin}" value="Profile"/> </h:form></li>

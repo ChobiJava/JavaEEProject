@@ -30,11 +30,17 @@ public class AddStudentBean {
     }
 
     public String addStudente() {
-        byte[] fileToPersist = file.getContents();
         newStudent.setContactInfo(newContact);
-        newStudent.setPhoto(fileToPersist);
+        if (file != null) {
+            byte[] fileToPersist = file.getContents();
+            if (fileToPersist.length < 10) {
+                newStudent.setPhoto(null);
+            } else {
+                newStudent.setPhoto(fileToPersist);
+            }
+        }
         sFacade.addStudent(newStudent);
-        return "/app/studentView.xhtml";
+        return "/school/students.xhtml";
     }
 
     public Student getNewStudent() {

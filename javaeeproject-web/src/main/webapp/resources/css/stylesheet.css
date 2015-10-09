@@ -297,6 +297,7 @@ input {
 .flex {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .flexC {
@@ -309,5 +310,10 @@ input {
 
 .ui-panelgrid-footer {
     text-align: center !important;
+}
+
+.customImage {
+    width: 240px;
+    height: 250px;
 }
 

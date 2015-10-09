@@ -2,10 +2,7 @@ package com.chobi.controller.attendance;
 
 import com.chobi.boundary.facades.AttendanceFacade;
 import com.chobi.boundary.facades.CourseFacade;
-import com.chobi.business.entities.Course;
-import com.chobi.business.entities.RedDay;
-import com.chobi.business.entities.Student;
-import com.chobi.business.entities.User;
+import com.chobi.business.entities.*;
 import com.chobi.controller.session.SessionBean;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultScheduleEvent;
@@ -47,6 +44,10 @@ public class AttendanceBean {
     private ScheduleModel schedule;
     private ScheduleEvent event;
     private boolean redDay;
+    private Date date;
+    private List<Date> dates;
+    private List<Student> present;
+    private List<Student> absent;
 
     public ScheduleModel getSchedule() {
         return schedule;
@@ -56,8 +57,9 @@ public class AttendanceBean {
         this.schedule = schedule;
     }
 
-    public void saveAttendance() {
+    public String saveAttendance() {
         aFacade.saveAttendance(studentsPresent, attendanceCourse);
+        return "school/admin.xhtml";
     }
 
     public List<Student> getStudentsPresent() {
@@ -145,8 +147,24 @@ public class AttendanceBean {
                 aFacade.saveRedDays(r);
             }
         }
+    }
 
+    public void checkDays(AjaxBehaviorEvent event) {
+        dates = aFacade.recieveDates(attendanceCourse);
+    }
 
+    public void setPresentAndAbsent(AjaxBehaviorEvent event) {
+        present = new ArrayList<>();
+        absent = new ArrayList<>();
+        LocalDate date2 = Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+        List<Attendance> attendaces = aFacade.attendanceForCourseAndDay(attendanceCourse, date2);
+        for (Attendance a : attendaces) {
+            if (a.isPresent()) {
+                present.add(a.getStudent());
+            } else {
+                absent.add(a.getStudent());
+            }
+        }
     }
 
     public boolean isRedDay() {
@@ -155,5 +173,37 @@ public class AttendanceBean {
 
     public void setRedDay(boolean redDay) {
         this.redDay = redDay;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public List<Date> getDates() {
+        return dates;
+    }
+
+    public void setDates(List<Date> dates) {
+        this.dates = dates;
+    }
+
+    public List<Student> getPresent() {
+        return present;
+    }
+
+    public void setPresent(List<Student> present) {
+        this.present = present;
+    }
+
+    public List<Student> getAbsent() {
+        return absent;
+    }
+
+    public void setAbsent(List<Student> absent) {
+        this.absent = absent;
     }
 }

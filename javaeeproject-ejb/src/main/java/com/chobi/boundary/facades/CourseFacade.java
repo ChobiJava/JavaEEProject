@@ -1,9 +1,6 @@
 package com.chobi.boundary.facades;
 
-import com.chobi.business.entities.Attendance;
-import com.chobi.business.entities.Course;
-import com.chobi.business.entities.Student;
-import com.chobi.business.entities.User;
+import com.chobi.business.entities.*;
 import com.chobi.business.service.CRUDService;
 import com.chobi.business.util.QueryParams;
 
@@ -62,6 +59,17 @@ public class CourseFacade {
     }
 
     public void deleteCourse(Course course) {
+        List<RedDay> redDays = crudService.findByNamedQuery(
+                RedDay.class,
+                RedDay.FIND_REDDAYS_FOR_COURSE,
+                QueryParams.with("course", course)
+                .parameters()
+        );
+        System.out.println(redDays.isEmpty());
+        for (RedDay r : redDays) {
+            crudService.delete(RedDay.class, r.getId());
+        }
+        crudService.delete(Course.class, course.getId());
 
     }
 

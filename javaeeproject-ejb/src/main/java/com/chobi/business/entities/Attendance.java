@@ -12,7 +12,8 @@ import java.time.LocalDate;
 @NamedQueries({
         @NamedQuery(name = Attendance.ATTENDANCE_FOR_COURSE_AND_DAY, query = "SELECT a from Attendance a where a.course.courseName like :course and a.schoolDay like :schoolday"),
         @NamedQuery(name = Attendance.ATTENDANCE_FOR_COURSE_AND_MONTH, query = "Select a from Attendance a where a.course.courseName like :course and MONTH(a.schoolDay) like :schoolday"),
-        @NamedQuery(name = Attendance.ATTENDANCE_FOR_STUDENT_AND_MONTH, query = "SELECT a from Attendance a where a.student.id like :student and MONTH(a.schoolDay) like :schoolday")
+        @NamedQuery(name = Attendance.ATTENDANCE_FOR_STUDENT_AND_MONTH, query = "SELECT a from Attendance a where a.student.id like :student and MONTH(a.schoolDay) like :schoolday"),
+        @NamedQuery(name = Attendance.ATTENDANCE_FOR_COURSE, query = "SELECT a from Attendance a where a.course like :course")
 })
 
 @NamedEntityGraphs({
@@ -39,6 +40,7 @@ public class Attendance extends SuperEntity{
     public static final String ATTENDANCE_FOR_COURSE_AND_MONTH = "attendance.FindAllForCourseAndMonth";
     public static final String ATTENDANCE_FOR_STUDENT_AND_MONTH = "attendance.FindAllForStudentAndMonth";
     public static final String GRAPH_DEEP = "attendance.WithCourse";
+    public static final String ATTENDANCE_FOR_COURSE = "attendance.forCcourse";
 
     @OneToOne
     @JoinColumn(name = "student_id")

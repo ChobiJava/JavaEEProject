@@ -27,7 +27,7 @@ public class EntityConverter implements Converter {
     private static final String EDIT_COURSE  = "/school/courses/course.xhtml";
     private static final String ATTENDANCE = "/app/attendance.xhtml";
     private static final String ADD_COURSE = "/school/courses/addcourse.xhtml";
-    private static final String SCHOOL_DAY = "/app/school-days.xhtml";
+    private static final String SCHOOL_DAY = "/school/management/schooldays.xhtml";
 
     @Inject
     private StudentFacade studentFacade;

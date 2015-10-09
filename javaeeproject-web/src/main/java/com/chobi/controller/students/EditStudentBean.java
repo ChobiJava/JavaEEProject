@@ -21,15 +21,25 @@ public class EditStudentBean {
     private UploadedFile file;
 
     public String save() {
-        byte[] fileToPersist = file.getContents();
-        student.setPhoto(fileToPersist);
+        if (file != null) {
+            byte[] fileToPersist = file.getContents();
+            if (fileToPersist.length < 10) {
+                System.out.println("test2");
+                student.setPhoto(null);
+            } else {
+                student.setPhoto(fileToPersist);
+            }
+
+        } else {
+            student.setPhoto(null);
+        }
         facade.editStudent(student);
-        return "/app/studentView.xhtml?faces-redirect=true";
+        return "/school/students.xhtml";
     }
 
     public String removeStudent() {
         facade.deleteStudent(student);
-        return "/app/studentView.xhtml?faces-redirect=true";
+        return "/school/students.xhtml";
     }
 
     public UploadedFile getFile() {

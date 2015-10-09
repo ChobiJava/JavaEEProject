@@ -6,47 +6,55 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <ui:include src="../../resources/templates/header.xhtml" />
+    <ui:include src="../../resources/templates/menu.xhtml" />
+    <div class="flex">
+        <p:panelGrid columns="1" styleClass="flexC" style="width: 40%;">
+            <h:form>
+                <p:growl id="bajs" />
+                <p:panelGrid columns="2" style="margin: 15px auto;">
+                    <p:outputLabel value="Course:" />
+                    <p:selectOneMenu value="#{attendanceBean.attendanceCourse}" converter="omnifaces.SelectItemsConverter" style="width: 200px;" >
+                        <f:selectItem itemLabel="Select One" />
+                        <f:selectItems var="course" value="#{attendanceBean.myCourses}" itemLabel="#{course.courseName}" itemValue="#{course}" />
+                        <p:ajax event="valueChange" process="@form" immediate="false" partialSubmit="true" update=":date" listener="#{attendanceBean.checkDays}" />
+                    </p:selectOneMenu>
+                </p:panelGrid>
+            </h:form>
+            <h:form id="date">
+                <p:growl />
+                <p:panelGrid columns="2" style="margin: 15px auto;">
+                    <p:outputLabel value="Course:" />
+                    <p:selectOneMenu value="#{attendanceBean.date}" converter="omnifaces.SelectItemsConverter" style="width: 200px;" >
+                        <f:selectItem itemLabel="Select One" />
+                        <f:selectItems var="d" value="#{attendanceBean.dates}" itemLabel="#{d.date}" itemValue="#{d}" />
+                        <p:ajax event="valueChange" process="@form" immediate="false" partialSubmit="true" update=":studentList" listener="#{attendanceBean.setPresentAndAbsent}" />
+                    </p:selectOneMenu>
+                </p:panelGrid>
+            </h:form>
+            <h:form id="studentList" >
+                <p:panelGrid columns="2" styleClass="flexC">
+                    <p:dataTable var="student" rendered="#{attendanceBean.date == null ? false : true}" value="#{attendanceBean.present}" style="margin: 0 auto;">
+                        <f:facet name="header">
+                            Present
+                        </f:facet>
+                        <p:column headerText="Name">
+                            <h:outputText value="#{student.firstName} #{student.lastName}" />
+                        </p:column>
+                    </p:dataTable>
+                    <p:dataTable var="student" rendered="#{attendanceBean.date == null ? false : true}" value="#{attendanceBean.absent}" style="margin: 0 auto;">
+                        <f:facet name="header">
+                            Absent
+                        </f:facet>
+                        <p:column headerText="Name">
+                            <h:outputText value="#{student.firstName} #{student.lastName}" />
+                        </p:column>
+                    </p:dataTable>
+                </p:panelGrid>
+            </h:form>
+        </p:panelGrid>
+    </div>
 
-<ui:include src="/resources/templates/header.xhtml" />
-<ui:include src="/resources/templates/menu.xhtml" />
-<h:body>
-    <f:view>
-        <div class="flex">
-            <p:panelGrid styleClass="flexC" columns="1">
-                <h:form>
-                    <p:growl sticky="false" showDetail="true" life="2000"/>
-                    <p:panelGrid columns="1" style="margin: 15px auto; text-align: center;" >
-                        <p:selectOneMenu styleClass="attMenu" value="#{statisticsBean.course}" converter="omnifaces.SelectItemsConverter" style="width: 200px;">
-                            <f:selectItem itemLabel="Select Course" />
-                            <f:selectItems value="#{statisticsBean.myCourses}" var="c" itemLabel="#{c.courseName}" itemValue="#{c}" />
-                        </p:selectOneMenu>
-                        <p:selectOneMenu styleClass="attMenu" value="#{statisticsBean.courseMonth}" style="width: 200px; text-align: center;" >
-                            <f:selectItem itemLabel="Select Month" />
-                            <f:selectItems value="#{statisticsBean.monthList}" />
-                        </p:selectOneMenu>
-                        <p:commandButton action="#{statisticsBean.populateChart()}" value="Show" update=":pie" ajax="false"/>
-                    </p:panelGrid>
-                </h:form>
-                <p:chart id="pie" type="pie" model="#{statisticsBean.chart}" rendered="#{statisticsBean.course == null ? false : true ||statisticsBean.courseMonth == 0 ? false : true}" style="width: 400px; height: 300px; margin: 0 auto;"/>
-            </p:panelGrid>
-            <p:panelGrid styleClass="flexC" columns="1">
-                <h:form>
-                    <p:growl sticky="false" showDetail="true" life="2000"/>
-                    <p:panelGrid columns="1" style="margin: 15px auto; text-align: center;" >
-                        <p:selectOneMenu styleClass="attMenu" value="#{statisticsBean.student}" converter="omnifaces.SelectItemsConverter" style="width: 200px;">
-                            <f:selectItem itemLabel="Select Student" />
-                            <f:selectItems value="#{statisticsBean.myStudents}" var="s" itemLabel="#{s.firstName} #{s.lastName}" itemValue="#{s}" />
-                        </p:selectOneMenu>
-                        <p:selectOneMenu styleClass="attMenu" value="#{statisticsBean.studentMonth}" style="width: 200px; text-align: center;" >
-                            <f:selectItem itemLabel="Select Month" />
-                            <f:selectItems value="#{statisticsBean.monthList}" />
-                        </p:selectOneMenu>
-                        <p:commandButton action="#{statisticsBean.populateChart2()}" value="Show" update=":pie2" ajax="false"/>
-                    </p:panelGrid>
-                </h:form>
-                <p:chart id="pie2" type="pie" model="#{statisticsBean.chart2}" rendered="#{statisticsBean.student == null ? false : true ||statisticsBean.studentMonth == 0 ? false : true}" style="width: 400px; height: 300px; margin: 0 auto;"/>
-            </p:panelGrid>
-        </div>
-    </f:view>
-</h:body>
+</f:view>
 </html>

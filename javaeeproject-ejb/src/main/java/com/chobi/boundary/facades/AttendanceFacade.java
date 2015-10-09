@@ -10,10 +10,8 @@ import com.chobi.business.util.QueryParams;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.ZoneId;
+import java.util.*;
 
 /**
  * Created by Chobii on 26/09/15.
@@ -144,5 +142,30 @@ public class AttendanceFacade {
 
     public void saveRedDays(RedDay redDay) {
         crudService.create(redDay);
+    }
+
+    public List<Date> recieveDates(Course course) {
+        System.out.println("check");
+        List<Date> dates = new ArrayList<>();
+        List<Attendance> attendances = crudService.findByNamedQuery(
+                Attendance.class,
+                Attendance.ATTENDANCE_FOR_COURSE,
+                Attendance.GRAPH_DEEP,
+                QueryParams.with("course", course)
+                .parameters()
+        );
+
+        Date date = null;
+        for (Attendance a : attendances) {
+            Date date1 = Date.from(a.getSchoolDay().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            if (date == date1) {
+
+            } else {
+                date = date1;
+                dates.add(date);
+            }
+        }
+
+        return dates;
     }
 }

@@ -54,6 +54,8 @@ public class StatisticsBean {
         myCourses = cFacade.getMyCourses(user);
         monthList = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
         myStudents = sFacade.retrieveMyStudents(user);
+        chart2 = new PieChartModel();
+        chart = new PieChartModel();
 
     }
 
@@ -114,7 +116,10 @@ public class StatisticsBean {
     public void populateChart2() {
         chart2 = new PieChartModel();
         map2 = aFacade.retrieveStatisticsForStudent(student, studentMonth);
+        System.out.println(student == null);
+        System.out.println(courseMonth);
         System.out.println(map2.get("present"));
+        System.out.println("hello?");
         chart2.set("Present", map2.get("present"));
         chart2.set("Absent", map2.get("absent"));
         chart2.setTitle("Attendance");

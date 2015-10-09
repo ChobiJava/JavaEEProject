@@ -31,13 +31,15 @@ public class EditCourseBean extends AutoCompleteStudent {
         setAllStudents(sFacade.retrieveAllStudents());
     }
 
-    public void removeCourse() {
+    public String removeCourse() {
         cFacade.deleteCourse(course);
+        return "/school/courses.xhtml";
     }
 
-    public void save() {
+    public String save() {
         course.setStudents(getStudentsInClass());
         cFacade.editCourse(course);
+        return "/school/courses.xhtml";
     }
 
     public Course getCourse() {
@@ -66,6 +68,7 @@ public class EditCourseBean extends AutoCompleteStudent {
 
     public void preRender(ComponentSystemEvent event) {
         setStudentsInClass(course.getStudents());
+        System.out.println("hello!==");
     }
 
 }

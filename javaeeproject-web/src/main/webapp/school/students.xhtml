@@ -10,22 +10,24 @@
 <ui:include src="/resources/templates/menu.xhtml" />
 <f:view>
     <div class="flex">
-        <ui:repeat value="#{studentsBean.students}" var="_student">
-            <p:panelGrid columns="2" styleClass="flexC">
-                <f:facet name="header">
-                    <p:graphicImage rendered="#{_student.photo == null ? false : true}" value="#{studentsBean.image}">
-                        <f:param name="student_id" value="#{_student.id}" />
-                    </p:graphicImage>
-                    <p:graphicImage rendered="#{_student.photo == null ? true : false}" url="http://img3.wikia.nocookie.net/__cb20130219042629/obsidianvalley/images/d/d6/Character_Placeholder.png" />
-                </f:facet>
-                <h:outputText value="Name:" />
-                <h:outputText value="#{_student.firstName} #{_student.lastName}"/>
-                <h:outputText value="SSN:" />
-                <h:link value="EDIT" outcome="/school/students/student.xhtml">
-                    <f:param name="id" value="#{_student.id}" />
-                </h:link>
-            </p:panelGrid>
-        </ui:repeat>
+        <p:panelGrid styleClass="flexC">
+            <ui:repeat value="#{studentsBean.students}" var="_student">
+                <p:panelGrid columns="2" styleClass="flexC">
+                    <f:facet name="header">
+                        <p:graphicImage  styleClass="customImage" rendered="#{_student.photo == null ? false : true}" value="#{studentsBean.image}">
+                            <f:param name="student_id" value="#{_student.id}" />
+                        </p:graphicImage>
+                        <p:graphicImage styleClass="customImage" rendered="#{_student.photo == null ? true : false}" library="images" name="Character_Placeholder.png" />
+                    </f:facet>
+                    <h:outputText value="Name:" />
+                    <h:outputText value="#{_student.firstName} #{_student.lastName}"/>
+                    <h:outputText value="SSN:" />
+                    <h:link value="EDIT" outcome="/school/students/student.xhtml">
+                        <f:param name="id" value="#{_student.id}" />
+                    </h:link>
+                </p:panelGrid>
+            </ui:repeat>
+        </p:panelGrid>
     </div>
 </f:view>
 </html>
